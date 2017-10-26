@@ -1,0 +1,53 @@
+@import 'assets/stylesheets/variables.scss';
+@import 'assets/stylesheets/mixins.scss';
+
+.header-container {
+  position: fixed;
+  width: 100%;
+  z-index: 10000;
+  background: $background-black;
+  .header {
+    display: flex;
+    padding-top: 16px;
+    padding-bottom: 10px;
+    .header__logotypes {
+      display: flex;
+      .members__logo {
+        font-size: 21px;
+        margin: 0;
+        font-family: Helvetica-Heavy, Arial, sans-serif;
+        &:hover {
+          color: #fff;
+        }
+        .Helvetica-Medium {
+          font-family: Helvetica-Medium, Arial, sans-serif;
+        }
+        @media screen and (max-width: $breakpoint-sm) {
+          font-size: 18px;
+        }
+      }
+    }
+
+    .hamburger {
+      display: inline-block;
+      cursor: pointer;
+      margin-left: auto;
+
+      .bar1, .bar2, .bar3 {
+        width: 29px;
+        height: 2px;
+        margin: 6px 0;
+        background-color: #ffffff;
+        transition: background-color ease 0.3s;
+      }
+      &:hover {
+        .bar1, .bar2, .bar3 {
+          background-color: $brand-blue;
+        }
+      }
+      .bar1{
+        margin: 0 0;
+      }
+    }
+  }
+}

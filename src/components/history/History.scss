@@ -1,0 +1,17 @@
+@import 'assets/stylesheets/variables.scss';
+
+.history {
+  color: #fff;
+  padding: 180px 0 100px;
+
+  .history__header {
+    width: 100%;
+  }
+
+  .heading-lg {
+    color: $brand-blue;
+    cursor: default;
+    margin-bottom:20px;
+  }
+
+}

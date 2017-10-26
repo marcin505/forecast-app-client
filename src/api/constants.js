@@ -1,0 +1,1 @@
+export const URL = 'http://www.kurde555.pl/';

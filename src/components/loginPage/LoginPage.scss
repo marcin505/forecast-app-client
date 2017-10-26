@@ -1,0 +1,21 @@
+@import 'assets/stylesheets/variables.scss';
+
+.login-page {
+  width: 550px;
+  margin: 0 auto;
+  //padding: 20px 0 20px 0;
+  padding-top: calc(50vh - 230px);
+
+  .community-logo {
+    font-size:30px;
+    font-family: Helvetica-Medium, Arial, sans-serif;
+    margin-bottom: 70px;
+    color: #fff;
+  }
+
+  @media screen and (max-width: 550px) {
+    width: 100%;
+    padding-left: $padding-mobile;
+    padding-right: $padding-mobile;
+  }
+}

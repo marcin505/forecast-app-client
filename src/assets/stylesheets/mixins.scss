@@ -1,0 +1,148 @@
+@import 'assets/stylesheets/variables.scss';
+
+@mixin heading-red-sm {
+  color: $brand-blue;
+  font-size:20px;
+  margin-bottom: 4px;
+  @media screen and (max-width: $breakpoint-md) {
+    margin: 0;
+    font-size:18px;
+  }
+}
+@mixin color-transition {
+  transition: color ease $color-animation-time;
+}
+
+@mixin background-color-transition {
+  transition: background-color ease $color-animation-time;
+}
+
+@mixin heading-md() {
+  font-size:25px;
+  color:#fff;
+  margin-bottom:6px;
+  font-family: Helvetica-Medium, Arial, sans-serif;;
+}
+
+@mixin heading-lg {
+  color: #fff;
+  font-size: 58px;
+  text-decoration: none;
+  font-family: Helvetica-Heavy, Arial, sans-serif;;
+  cursor: pointer;
+  @include color-transition;
+  &.semi-bold{
+    font-family: Helvetica-Heavy, Arial, sans-serif;
+  }
+  &:hover, &.highlight {
+    color: $brand-blue;
+  }
+  @media screen and (max-width: $breakpoint-md) {
+    font-size: 40px;
+  }
+}
+
+@mixin close-button {
+  position: relative;
+  width: 33px;
+  height: 33px;
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    top: 16px;
+    background: #fff;
+    transition: background ease $color-animation-time;
+  }
+  &::before {
+    transform: rotate(45deg);
+  }
+  &::after {
+    transform: rotate(-45deg);
+  }
+  &:hover {
+    &::before, &::after {
+      background: $brand-blue;
+      transition: background ease $color-animation-time;
+    }
+  }
+  @media screen and (max-width: $breakpoint-md) {
+    top:-5px;
+  }
+}
+
+@mixin red-border(){
+  border: 2px $brand-blue solid;
+}
+
+@mixin section-image {
+  margin-right: 30px;
+  height:270px;
+  &.black {
+    opacity: 0.5;
+    filter: grayscale(100%);
+  }
+  @media screen and (max-width: $breakpoint-md) {
+    display: none;
+  }
+  &.mobile {
+    display: none;
+    width:150px;
+    height:150px;
+    margin-bottom:30px;
+    @media screen and (max-width: $breakpoint-md) {
+      display: block;
+
+    }
+  }
+}
+
+@mixin background-transition {
+  transition: background 0.3s ease-out;
+}
+
+@mixin image-record($width) {
+  display: flex;
+  flex-direction: column;
+  width: $width;
+  margin-right: 30px;
+  margin-bottom: 30px;
+  cursor: pointer;
+  position: relative;
+  opacity: 0.5;
+  transition: opacity ease-in 0.3s;
+
+  .image-record__heading {
+    margin-bottom: 9px;
+    font-size: 16px;
+    font-family: Helvetica-Medium, Arial, sans-serif;
+  }
+
+  .image {
+    width: 100%;
+    filter: grayscale(100%);
+    transition: filter ease $color-animation-time;
+  }
+
+  .arrow {
+    position: absolute;
+    bottom:0;
+    width: 100%;
+    height: 60px;
+    background: url( '../../../../assets/images/arrow.png') no-repeat 50% 50% $brand-blue;
+    opacity: 0;
+    transition: opacity ease $color-animation-time;
+  }
+
+  &:hover {
+    opacity: 1 !important;
+    .image {
+      filter: grayscale(0%);
+    }
+    .arrow {
+      align-self: flex-end;
+      opacity: 1;
+    }
+  }
+}

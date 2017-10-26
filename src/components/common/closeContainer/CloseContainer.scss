@@ -1,0 +1,36 @@
+@import 'assets/stylesheets/mixins.scss';
+
+.close-container {
+  margin-left: auto;
+  cursor: pointer;
+  height: 40px;
+  display: flex;
+
+  h2 {
+    font-size: 31px;
+    margin-bottom: 0;
+    padding-right:15px;
+    position: relative;
+    right:0;
+    transition: color ease $color-animation-time;
+    @media screen and (max-width: $breakpoint-md) {
+      display: none;
+    }
+  }
+
+  &:hover {
+    h2 {
+      color: $brand-blue;
+      transition: color ease $color-animation-time;
+    }
+    .close{
+      &::before, &::after {
+        background: $brand-blue;
+        transition: background ease $color-animation-time;
+      }
+    }
+  }
+  .close {
+    @include close-button;
+  }
+};

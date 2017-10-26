@@ -1,0 +1,14 @@
+@import 'assets/stylesheets/variables.scss';
+@import 'assets/stylesheets/mixins.scss';
+
+.browse {
+  margin-top:40px;
+  .browse__letters {
+    .letter {
+      margin-right:12px;
+      font-size:18px;
+      cursor: pointer;
+    }
+  }
+};
+

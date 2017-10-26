@@ -1,0 +1,39 @@
+@import 'assets/stylesheets/variables.scss';
+@import 'assets/stylesheets/mixins.scss';
+
+.vote-info  {
+  padding: $expanding-modules-top-padding 0 0;
+  margin-bottom: $expanding-modules-bottom-margin;
+  background: $background-black;
+  .vote-info__top{
+    display: flex;
+    margin-bottom: 60px;
+    .col-1 {
+      .vote-info__heading {
+        margin-bottom: 10px;
+        @include heading-md();
+      }
+    }
+
+    .col-2 {
+      margin-left: 40px;
+      @media screen and (max-width: $breakpoint-md) {
+        margin-left: 20px;
+
+      }
+      .ribbon {
+        height: 133px;
+        @media screen and (max-width: $breakpoint-md) {
+          height: 115px;
+        }
+      }
+    }
+
+  }
+  @include background-transition;
+  &.vote-info--dark {
+    background: $background-grey;
+    @include background-transition;
+    min-height: 300px;
+  }
+}

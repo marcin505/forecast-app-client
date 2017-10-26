@@ -1,0 +1,36 @@
+@import 'assets/stylesheets/variables.scss';
+@import 'assets/stylesheets/mixins.scss';
+
+.nominated-user-info {
+  padding: 25px 0 25px;
+  display: flex;
+  align-items: flex-start;
+  border-bottom: 2px $border-color solid;
+  .section-image {
+    @include section-image;
+  }
+  .nominated-user-info__right-section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    h1 {
+      margin: 20px 0 30px 0;
+      font-size: 41px;
+      font-family: Helvetica-Medium, Arial, sans-serif;
+      @media screen and (max-width: $breakpoint-md) {
+        margin: 20px 0 10px 0;
+        font-size: 26px;
+      }
+    }
+    .nominated-for-heading {
+      font-size: 20px;
+      font-family: Helvetica-Medium, Arial, sans-serif;
+      margin-bottom: 10px;
+    }
+
+    .nominations-container{
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}

@@ -1,0 +1,19 @@
+@import 'assets/stylesheets/mixins.scss';
+
+.nominations-list {
+  transition: height ease-out 0.8s;
+  overflow: hidden;
+  .nominations-list__header {
+    display: flex;
+    padding-bottom: 5px;
+    align-items: center;
+    border-bottom: solid 2px #3d3d3d;
+    .nominations-list__heading {
+      font-family: Helvetica-Roman, Arial, sans-serif;
+      font-size: 24px;
+    }
+  }
+  .list {
+    margin-bottom:30px;
+  }
+}

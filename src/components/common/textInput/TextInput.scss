@@ -1,0 +1,36 @@
+@import 'assets/stylesheets/variables.scss';
+
+.text-input-wrapper {
+  margin-bottom:40px;
+  input[type="text"] {
+    &.input-lg {
+      height: 80px;
+      font-size: 50px;
+      font-family: Helvetica-Medium, Arial, sans-serif;
+      padding-bottom: 0;
+      border-color: $brand-blue;
+    }
+
+    &:focus {
+      outline-width: 0;
+    }
+
+    &::-webkit-input-placeholder {
+      color: #fff;
+      text-transform: capitalize;
+    }
+
+    &.error {
+      color: $brand-blue;
+      border-color: $brand-blue;
+      &::-webkit-input-placeholder {
+        color: $brand-blue;
+
+      }
+    }
+  }
+  .form-field-message {
+    color: $brand-blue;
+    font-size:14px;
+  }
+}

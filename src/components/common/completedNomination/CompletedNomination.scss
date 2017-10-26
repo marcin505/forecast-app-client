@@ -1,0 +1,67 @@
+@import 'assets/stylesheets/variables.scss';
+@import 'assets/stylesheets/mixins.scss';
+
+.completed-nomination-wrapper {
+
+  .completed-nomination {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    background: $background-nomintation;
+    width: 100%;
+    margin: 0 0 8px;
+    font-family: Helvetica-Roman, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.75;
+    color: #ffffff;
+    transition: border-color ease $color-animation-time;
+
+    .nomination__text {
+      padding: 20px 20px 20px 20px;
+      &.nomination__text--padding-20 {
+        padding: 20px;
+      }
+    }
+
+    &.completed-nomination--border {
+      @include red-border;
+    }
+
+    .selection-controls {
+      display: flex;
+      padding-left: 20px;
+
+      .info-container {
+        display: flex;
+        .info-record {
+          color: #848484;
+          font-family: Helvetica-Roman, Arial, sans-serif;
+          font-size: 16px;
+          margin-right: 20px;
+          padding-top: 3px;
+          span {
+            color: #fff;
+            font-family: Helvetica-Medium, Arial, sans-serif;
+          }
+        }
+      }
+
+      .buttons-container{
+        margin-top:-4px;
+      }
+
+      @media screen and (max-width: $page-width) {
+        justify-content:flex-start;
+        flex-direction: column;
+        padding-left:0;
+        .info-container {
+          margin-left: auto;
+          margin-bottom: 4px;
+        }
+      }
+    }
+  }
+  .textarea-wrapper {
+    margin-bottom: 10px;
+  }
+}

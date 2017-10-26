@@ -1,0 +1,36 @@
+@import 'assets/stylesheets/variables.scss';
+@import 'assets/stylesheets/mixins.scss';
+
+.employees-search-results {
+  margin-top: 20px;
+  padding-top: 20px;
+  .employees-search__list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .image-record {
+    @include image-record(270px);
+    @media screen and (min-width: $page-width) {
+      &:nth-child(4n) {
+        margin-right: 0;
+      }
+    }
+    @media screen and (max-width: 660px) {
+      &:nth-child(2n) {
+        margin-right: 0;
+      }
+      width:47%;
+      margin-right: 20px;
+      .image-record__heading {
+        font-size:13px;
+      }
+    }
+    @media screen and (max-width: 400px) {
+      width:100%;
+      margin-right: 0;
+      .image-record__heading {
+        font-size:15px;
+      }
+    }
+  }
+}

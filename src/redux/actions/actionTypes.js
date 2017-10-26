@@ -1,0 +1,15 @@
+/* Auth */
+
+export const LOGGING_BY_EMAIL = 'LOGGING_BY_EMAIL';
+export const LOGGING_BY_EMAIL_FAILED = 'LOGGING_BY_EMAIL_FAILED';
+export const LOGGING_BY_EMAIL_SUCCESS = 'LOGGING_BY_EMAIL_SUCCESS';
+
+/* Employers */
+export const SET_NOMINATED_PERSON_ID = 'SET_NOMINATED_PERSON_ID';
+
+/* Nominations */
+export const SET_NOMINATION_ADDED = 'SET_NOMINATION_ADDED';
+
+/* menu*/
+
+export const TOGGLE_MENU = 'TOGGLE_MENU';

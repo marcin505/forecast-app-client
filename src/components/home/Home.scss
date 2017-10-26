@@ -1,0 +1,9 @@
+@import 'assets/stylesheets/variables.scss';
+
+.home {
+  padding-top:$page-top-padding;
+  padding-bottom: 0;
+  &.home--additional-padding {
+    padding-bottom:600px;
+  }
+}

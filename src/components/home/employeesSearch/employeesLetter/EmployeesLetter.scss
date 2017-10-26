@@ -1,0 +1,42 @@
+@import 'assets/stylesheets/variables.scss';
+@import 'assets/stylesheets/mixins.scss';
+
+.employees-letter {
+  margin-top: 30px;
+  .employees-letter__heading {
+    font-family: Helvetica-Heavy, Arial, sans-serif;
+    font-size: 36px;
+    color: $brand-blue;
+  }
+
+  .employees-letter__list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px 0 20px;
+    .image-record {
+      @include image-record(210px);
+      @media screen and (min-width: $page-width) {
+        &:nth-child(5n) {
+          margin-right: 0;
+        }
+      }
+      @media screen and (max-width: 530px) {
+        &:nth-child(2n) {
+          margin-right: 0;
+        }
+        width:47%;
+        margin-right: 20px;
+        .image-record__heading {
+          font-size:13px;
+        }
+      }
+      @media screen and (max-width: 400px) {
+        width:100%;
+        margin-right: 0;
+        .image-record__heading {
+          font-size:15px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+@import 'assets/stylesheets/variables.scss';
+.link {
+  padding: 0 0 20px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #fff;
+  display: block;
+  font-family: Helvetica-Heavy, Arial, sans-serif;
+  &:hover, &.active {
+    color: $brand-blue;
+  }
+}
