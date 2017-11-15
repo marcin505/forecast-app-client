@@ -8,6 +8,7 @@ class NominationTextarea extends Component {
   static propTypes = {
     resetNominatedPersonId: PropTypes.func,
     setNominationAdded: PropTypes.func,
+    addNomination: PropTypes.func.isRequired,
     nominatedUser: PropTypes.object.isRequired,
     onNominate: PropTypes.func,
     onCancel: PropTypes.func,
@@ -69,15 +70,16 @@ class NominationTextarea extends Component {
     })
   };
 
-  nominatePerson = () => {
-    console.log(this.state.nominationReason);
+  nominatePerson = (personId, nomination) => {
     this.props.resetNominatedPersonId();
     this.props.setNominationAdded({ nominationAdded: true });
+    this.props.addNomination(personId, nomination);
     this.props.onNominate();
   };
 
   renderNominatingButtons = () => {
     const { nominationString, nominationReason } = this.state;
+    const personId = this.props.nominatedUser.get('id');
     return (
       <div className="buttons-container inside-input">
         <button className="button-sm clear" onClick={()=> this.resetTextArea()}>
@@ -90,7 +92,7 @@ class NominationTextarea extends Component {
         }
         <button
           className="button-sm"
-          onClick={()=> this.nominatePerson()}
+          onClick={()=> this.nominatePerson(personId, nominationReason)}
           disabled={nominationReason === '' || nominationReason.slice(0,39) === nominationString }
           >
           Nominate

@@ -11,11 +11,11 @@ class NominationsList extends Component {
     possibleToVote: PropTypes.bool,
     possibleToSelectWinner: PropTypes.bool,
     addVote: PropTypes.func,
-    addNomination: PropTypes.func,
     setNominationAdded: PropTypes.func,
     resetNominatedPersonId: PropTypes.func,
     closeAction: PropTypes.func,
     params:PropTypes.object,
+    addNomination: PropTypes.func,
   };
 
   static defaultProps = {
@@ -23,9 +23,9 @@ class NominationsList extends Component {
     possibleToVote: true,
     possibleToSelectWinner: false,
     addVote: () => {},
-    addNomination: () => {},
     setNominationAdded: () => {},
     resetNominatedPersonId: () => {},
+    addNomination: () => {},
     closeAction: null,
     params: null,
   };
@@ -71,6 +71,7 @@ class NominationsList extends Component {
                     addVote={addVote}
                     possibleToSelectWinner={possibleToSelectWinner}
                     params={this.props.params}
+                    addNomination={this.props.addNomination}
                   />
                 )
               }

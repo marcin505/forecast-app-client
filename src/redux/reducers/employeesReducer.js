@@ -3,6 +3,7 @@ import {monthsArray} from 'components/common/utils/functionUtils.js';
 import {
    SET_NOMINATED_PERSON_ID,
    SET_NOMINATION_ADDED,
+   ADD_NOMINATION,
 } from 'redux/actions/actionTypes';
 
 export const initialState = fromJS({
@@ -244,7 +245,23 @@ export default function employeesReducer(state = initialState, {type, payload}) 
       case SET_NOMINATION_ADDED:
          return state
             .set('nominationAdded', payload.nominationAdded);
-      default:
+      case ADD_NOMINATION:{
+        const employees = state.get('employees').map(record=> {
+           if (payload.personId === record.get('id')) {
+              record = record.update('nominations', arr => arr.push(fromJS({
+                 id: 663,
+                 nomination: payload.nomination,
+                 votes: 11,
+                 author: 'Mel Gibson'
+              })));
+           }
+           return record;
+        });
+
+        return state.set('employees', employees);
+      }
+      default:{
          return state;
+      }
    }
 };

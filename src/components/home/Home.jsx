@@ -9,7 +9,7 @@ import {
   getVotingMonth,
   getEmployeesReducer,
 } from 'redux/selectors/employeesSelectors.js';
-import { setNominatedPersonId, setNominationAdded } from 'redux/actions/employeesActions.js';
+import { setNominatedPersonId, setNominationAdded, addNomination } from 'redux/actions/employeesActions.js';
 import PropTypes from 'prop-types';
 import { Element, scroller } from 'react-scroll';
 import TransitionGroup from 'react-addons-transition-group';
@@ -71,6 +71,7 @@ class Home extends Component {
         resetNominatedPersonId = {this.resetNominatedPersonId}
         nominatedUser = {nominatedUser}
         setNominationAdded = {setNominationAdded}
+        addNomination = {this.addNomination}
       >
       </NominateUser>
     );
@@ -96,8 +97,8 @@ class Home extends Component {
      this.setState({ voteAdded: true });
   };
 
-  addNomination = () =>{
-    console.log('addNomination')
+  addNomination = (personId, nomination) =>{
+    this.props.addNomination({personId, nomination})
   };
 
   setExpandedSections = (section, value, scrollProperties) => {
@@ -197,6 +198,10 @@ const mapDispatchToProps = dispatch => ({
     setNominationAdded,
     dispatch,
   ),
+  addNomination : bindActionCreators(
+     addNomination,
+     dispatch,
+  )
 });
 
 const mapStateToProps = state => ({

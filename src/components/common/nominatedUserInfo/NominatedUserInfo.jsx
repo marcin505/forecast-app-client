@@ -58,6 +58,7 @@ class NominatedUserInfo extends Component {
         setNominationAdded={this.props.setNominationAdded}
         onNominate={this.props.collapseListView}
         onCancel={this.collapseTextArea}
+        addNomination={this.props.addNomination}
       />
     )
   };
