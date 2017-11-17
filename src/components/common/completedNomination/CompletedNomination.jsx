@@ -15,6 +15,7 @@ class CompletedNomination extends Component {
     addVote: PropTypes.func,
     possibleToSelectWinner: PropTypes.bool,
     isVotingMonth: PropTypes.bool,
+    raiseVotes: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -162,6 +163,8 @@ class CompletedNomination extends Component {
     const nomination = this.props.nomination;
     const author = nomination.get('author');
     const votes = nomination.get('votes');
+    const nominationId= nomination.get('id');
+    const personId = this.props.nominatedUser.get('id')
     const {isVotingMonth} = this.props;
     return (
       <div className="selection-controls">
@@ -169,7 +172,7 @@ class CompletedNomination extends Component {
           <div className="info-record">
             Added by: <span>{author}</span>
           </div>
-          <div className="info-record">
+          <div className="info-record" onClick={() => this.props.raiseVotes({personId, nominationId, votesCount: votes+30})}>
             Votes: <span>{votes}</span>
           </div>
         </div>

@@ -7,6 +7,7 @@ export const LOGGING_BY_EMAIL_SUCCESS = 'LOGGING_BY_EMAIL_SUCCESS';
 /* Employers */
 export const SET_NOMINATED_PERSON_ID = 'SET_NOMINATED_PERSON_ID';
 export const ADD_NOMINATION = 'ADD_NOMINATION';
+export const RAISE_VOTES = 'RAISE_VOTES';
 
 /* Nominations */
 export const SET_NOMINATION_ADDED = 'SET_NOMINATION_ADDED';

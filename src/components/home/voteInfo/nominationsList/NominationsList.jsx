@@ -55,7 +55,7 @@ class NominationsList extends Component {
     const { addVote, possibleToVote, closeAction, possibleToSelectWinner } = this.props;
 
     return (
-      <div className="nominations-list" id="nominations-list"ref={c => this.container = c}>
+      <div className="nominations-list" id="nominations-list" ref={c => this.container = c}>
         <div className="nominations-list__header">
           <div className="nominations-list__heading">List of Nominations</div>
         </div>

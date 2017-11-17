@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {
   getVotingMonth,
 } from 'redux/selectors/employeesSelectors.js';
+import { raiseVotes } from 'redux/actions/employeesActions.js';
 import CompletedNomination from 'components/common/completedNomination/CompletedNomination.jsx';
 import NominationTextarea from 'components/common/nominationTextarea/NominationTextarea.jsx';
 import JustificationTextarea from 'components/admin/justificationTextarea/JustificationTextarea.jsx';
@@ -21,6 +23,7 @@ class NominatedUserInfo extends Component {
     possibleToSelectWinner: PropTypes.bool,
     votingMonth: PropTypes.string.isRequired,
     params: PropTypes.object,
+    raiseVotes: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -80,6 +83,7 @@ class NominatedUserInfo extends Component {
       this.props.votingMonth === this.props.params.month :
         false;
     const {nominatedUser, addVote, possibleToVote, possibleToSelectWinner } = this.props;
+    const personId = nominatedUser.get('id');
     const { isVoteTextarea,  } = this.state;
     const name = nominatedUser.get('name');
     const nominations = nominatedUser.get('nominations');
@@ -99,7 +103,7 @@ class NominatedUserInfo extends Component {
           <h1>
             {`${name} ${surname}`}
           </h1>
-          <img className={mobileSectionImageClasses} src={han_solo} alt="e2"/>
+          <img className={mobileSectionImageClasses} src={han_solo} alt="e2" />
           <div className="nominated-for-heading">
             Nominated for:
           </div>
@@ -115,6 +119,7 @@ class NominatedUserInfo extends Component {
                     key={id}
                     possibleToSelectWinner={possibleToSelectWinner}
                     isVotingMonth={isVotingMonth}
+                    raiseVotes = {this.props.raiseVotes}
                   />
                 )
               })
@@ -130,10 +135,15 @@ class NominatedUserInfo extends Component {
     );
   }
 }
-
+const mapDispatchToProps = dispatch => ({
+   raiseVotes : bindActionCreators(
+      raiseVotes,
+      dispatch,
+   )
+});
 
 const mapStateToProps = state => ({
   votingMonth: getVotingMonth(state)
 });
 
-export default connect(mapStateToProps, null)(NominatedUserInfo);
+export default connect(mapStateToProps, mapDispatchToProps)(NominatedUserInfo);

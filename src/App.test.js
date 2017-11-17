@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import employeesReducer, {initialState} from './redux/reducers/employeesReducer.js';
-import { setNominationAdded } from './redux/actions/employeesActions.js';
+import { setNominationAdded, raiseVotes } from './redux/actions/employeesActions.js';
 import App from './components/App';
 import { sum, selectImage, fetchData, failFetchData } from './components/common/utils/testFunctions.js';
 
@@ -65,12 +65,43 @@ describe('testing employeesReducer', () => {
    it('should handle initial state', () => {
       expect(
          employeesReducer(undefined, {})
-      ).toEqual(initialState)
-   })
+      ).toEqual(initialState);
+   });
    it('should handle SET_NOMINATED_PERSON_ID', () => {
       expect(
          employeesReducer(initialState, setNominationAdded({nominationAdded : true})) //received
       ).toEqual(initialState.set('nominationAdded', true)) //expected
-   })
+   });
+   it('should handle RAISE_VOTES', ()=> {
+      const payload = {
+         personId : 6,
+         nominationId : 101,
+         votesCount: 140
+      };
+      const employees = initialState
+         .get('employees')
+         .map(record=> {
+               if (payload.personId === record.get('id')) {
+                  const nominations = record
+                     .get('nominations')
+                     .map(nomRecord => {
+                        return (payload.nominationId === nomRecord.get('id')) ?
+                           nomRecord.set('votes', payload.votesCount) :
+                           nomRecord;
+                     });
+                  return record.set('nominations', nominations);
+               } else {
+                  return record;
+               }
+            }
+         );
+      let expected = initialState.set('employees', employees);
+      expect(
+         employeesReducer(initialState, raiseVotes({
+            personId: payload.personId,
+            nominationId: payload.nominationId,
+            votesCount: payload.votesCount}))
+      ).toEqual(expected);
+   });
 });
 

@@ -4,6 +4,7 @@ import {
    SET_NOMINATED_PERSON_ID,
    SET_NOMINATION_ADDED,
    ADD_NOMINATION,
+   RAISE_VOTES,
 } from 'redux/actions/actionTypes';
 
 export const initialState = fromJS({
@@ -251,14 +252,32 @@ export default function employeesReducer(state = initialState, {type, payload}) 
               record = record.update('nominations', arr => arr.push(fromJS({
                  id: 663,
                  nomination: payload.nomination,
-                 votes: 11,
-                 author: 'Mel Gibson'
               })));
            }
            return record;
         });
-
         return state.set('employees', employees);
+      }
+      case RAISE_VOTES: {
+         console.log(payload);
+         const employees = state
+            .get('employees')
+            .map(record=> {
+                  if (payload.personId === record.get('id')) {
+                     const nominations = record
+                        .get('nominations')
+                        .map(nomRecord => {
+                           return (payload.nominationId === nomRecord.get('id')) ?
+                              nomRecord.set('votes', payload.votesCount) :
+                              nomRecord;
+                        });
+                     return record.set('nominations', nominations);
+                  } else {
+                     return record;
+                  }
+               }
+            );
+         return state.set('employees', employees);
       }
       default:{
          return state;

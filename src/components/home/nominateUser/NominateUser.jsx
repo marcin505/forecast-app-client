@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import PropTypes from 'prop-types';
 import SectionHeader from 'components/common/sectionHeader/SectionHeader.jsx';
 import NominationTextarea from 'components/common/nominationTextarea/NominationTextarea.jsx';
