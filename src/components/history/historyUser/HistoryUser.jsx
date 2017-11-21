@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import han from 'assets/images/people/han_solo.png';
-import ribbon from 'assets/images/badge.svg';
 import './HistoryUser.css';
 
 const HistoryUser = ({ user }) => {

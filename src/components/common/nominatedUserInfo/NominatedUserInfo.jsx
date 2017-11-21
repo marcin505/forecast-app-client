@@ -83,7 +83,6 @@ class NominatedUserInfo extends Component {
       this.props.votingMonth === this.props.params.month :
         false;
     const {nominatedUser, addVote, possibleToVote, possibleToSelectWinner } = this.props;
-    const personId = nominatedUser.get('id');
     const { isVoteTextarea,  } = this.state;
     const name = nominatedUser.get('name');
     const nominations = nominatedUser.get('nominations');
