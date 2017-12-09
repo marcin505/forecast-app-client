@@ -13,7 +13,6 @@ export const setNominatedPersonId = ({personId}) => ({
 });
 
 export const setNominationAdded = ({nominationAdded}) => {
-   console.log(15, nominationAdded);
    return ({
       type: SET_NOMINATION_ADDED,
       payload: {

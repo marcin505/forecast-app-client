@@ -8,7 +8,7 @@ class NominationTextarea extends Component {
   static propTypes = {
     resetNominatedPersonId: PropTypes.func,
     setNominationAdded: PropTypes.func,
-    addNomination: PropTypes.func.isRequired,
+    addNomination: PropTypes.func,
     nominatedUser: PropTypes.object.isRequired,
     onNominate: PropTypes.func,
     onCancel: PropTypes.func,
@@ -19,6 +19,8 @@ class NominationTextarea extends Component {
     resetNominatedPersonId: () => {},
     onNominate: () => {},
     onCancel: null,
+    nominatedUser: {},
+    addNomination: () => {},
   };
 
   constructor(props) {

@@ -10,18 +10,22 @@ const HOC = (WrappedComponent) => {
 
       }
 
-      onNameChangeHOC = (text) => {
-         this.setState({nameHOC: text},
-            () => console.log(this.state.nameHOC)
+      onNameChangeHOC = (e) => {
+         e.preventDefault();
+         this.setState({nameHOC: e.target.value},
+            () => console.log(this.state)
          );
       };
 
       render() {
          const newProps = {
-            nameHOC: this.state.nameHOC,
-            onNameChangeHOC: this.onNameChangeHOC,
+            nameHOC: {
+               value: this.state.name,
+               onChange: this.onNameChangeHOC
+            }
          };
-         return <WrappedComponent {...this.props} {...newProps}/>
+
+         return <WrappedComponent {...newProps} {...this.props} />
       }
    }
 };

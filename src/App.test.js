@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import employeesReducer, {initialState} from './redux/reducers/employeesReducer.js';
 import { setNominationAdded, raiseVotes } from './redux/actions/employeesActions.js';
+import {RAISE_VOTES} from './redux/actions/actionTypes.js'
 import App from './components/App';
 import { sum, selectImage, fetchData, failFetchData } from './components/common/utils/testFunctions.js';
 
@@ -105,3 +106,13 @@ describe('testing employeesReducer', () => {
    });
 });
 
+describe('test actions', () => {
+   const payload = {
+      personId : 2,
+      nominationId : 2,
+      votesCount: 2
+   };
+   it('actionCreator raiseVotes', () => {
+      expect(raiseVotes(payload)).toEqual({type:RAISE_VOTES, payload});
+   });
+});

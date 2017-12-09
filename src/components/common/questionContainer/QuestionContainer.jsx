@@ -14,6 +14,7 @@ class questionContainer extends Component {
     const { yesAction, noAction } =this.props;
     return (
       <div className="buttons-container">
+
         <button className="button-sm medium-dark" onClick={() => noAction()}>No</button>
         <button className="button-sm light" onClick={() => yesAction()}>Yes</button>
       </div>

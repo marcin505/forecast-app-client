@@ -181,7 +181,7 @@ class Home extends Component {
       const {voteAdded, isModal} = this.state;
       return (
          <div className="home">
-            <input type='text' onChange={(e) =>this.onNameChangeHOC(e)} />
+            <input type='text' {...this.props.nameHOC} />
             <Element name="voteInfo">
                {voteAdded ? this.renderVotingCallMessage(votingMonth) : this.renderVoteInfo(votingMonth, votingYear)}
             </Element>

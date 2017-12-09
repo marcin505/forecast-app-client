@@ -13,7 +13,7 @@ import classNames from 'classnames';
 import './EmployeesSearch.css';
 import _ from 'lodash';
 
-class EmployeesSearch extends Component {
+export class EmployeesSearch extends Component {
 
   static propTypes = {
     employees: PropTypes.object.isRequired,

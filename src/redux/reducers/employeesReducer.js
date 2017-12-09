@@ -259,7 +259,7 @@ export default function employeesReducer(state = initialState, {type, payload}) 
         return state.set('employees', employees);
       }
       case RAISE_VOTES: {
-         console.log(payload);
+         // console.log(payload);
          const employees = state
             .get('employees')
             .map(record=> {

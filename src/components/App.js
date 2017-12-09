@@ -11,6 +11,7 @@ import rootSaga from 'redux/sagas/rootSaga';
 import DocumentTitle from 'react-document-title';
 import Header from 'components/header/Header.jsx'
 import Footer from 'components/footer/Footer.jsx'
+import ApiTest from 'components/apiTest/ApiTest.jsx';
 import Home from 'components/home/Home.jsx'
 import History from 'components/history/History.jsx'
 import AdminHome from 'components/admin/adminHome/AdminHome.jsx'
@@ -21,6 +22,7 @@ import  {
   LOGIN,
   USER_HOME,
   USER_HISTORY,
+  API_TEST,
 } from 'routes/routesDefinitions.js';
 import LoginPage from 'components/loginPage/LoginPage.jsx'
 import PrivateRoute from 'routes/PrivateRoute.js';
@@ -51,6 +53,7 @@ class App extends Component {
                 <Header />
                 <Switch>
                   <Route path={USER_HOME} component={Home}/>
+                  <Route path={API_TEST} component={ApiTest} />
                   <PrivateRoute
                     auth={() => true}
                     path={USER_HISTORY}

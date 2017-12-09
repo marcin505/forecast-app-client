@@ -20,6 +20,7 @@ const immutableExamples = () =>  {
    let a = fromJS({
       a: {b:{c:[3,4,5], d:3}, w:2}
    });
+
    a = a
       .setIn(['a', 'b', 'd'], 'kurde')
       .updateIn(['a', 'b', 'd'], val => val+val)
