@@ -234,7 +234,7 @@ export const initialState = fromJS({
    ]),
    nominatedPersonId: null,
    nominationAdded: false,
-   votingMonth: monthsArray[new Date().getMonth() - 1],
+   votingMonth: monthsArray[new Date().getMonth()],
    votingYear: new Date().getFullYear(),
 });
 

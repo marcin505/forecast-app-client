@@ -13,7 +13,7 @@ const HOC = (WrappedComponent) => {
       onNameChangeHOC = (e) => {
          e.preventDefault();
          this.setState({nameHOC: e.target.value},
-            () => console.log(this.state)
+            () => console.log(this.state.nameHOC)
          );
       };
 
@@ -25,6 +25,7 @@ const HOC = (WrappedComponent) => {
             }
          };
 
+         // return <WrappedComponent nameHOC = {newProps.nameHOC} {...this.props} />
          return <WrappedComponent {...newProps} {...this.props} />
       }
    }

@@ -152,13 +152,9 @@ class Home extends Component {
       />
    );
 
-   onNameChangeHOC = (e) => {
-      e.preventDefault();
-      const text = e.target.value;
-      this.props.onNameChangeHOC(text);
-   };
 
    renderCurrentNominations = () => {
+      console.log(3)
       const expanded = this.state.expandedSections.toJS().currentNominations;
       const {votingYear, votingMonth, setNominationAdded} = this.props;
       return (
