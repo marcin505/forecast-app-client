@@ -17,8 +17,6 @@ export class EmployeesSearch extends Component {
 
   static propTypes = {
     employees: PropTypes.object.isRequired,
-    setNominatedPersonId: PropTypes.func.isRequired,
-    setNominationAdded: PropTypes.func.isRequired,
     expanded: PropTypes.bool.isRequired,
     setExpandedSections: PropTypes.func.isRequired,
   };
@@ -69,7 +67,6 @@ export class EmployeesSearch extends Component {
       smooth: true,
       offset: -50,
     };
-    this.props.setNominationAdded({ nominationAdded: false });
     this.setState({ placeHolder: '', isBrowseAll: false });
     this.props.setExpandedSections('employeesSearch', true, scrollProperties);
   };
@@ -82,10 +79,6 @@ export class EmployeesSearch extends Component {
     this.setState({ searchString: '',  placeHolder: 'Add your Nominee' });
     this.props.setExpandedSections('employeesSearch', false);
     this.setState({ foundRecords:fromJS([])});
-  };
-
-  setNominatedPersonId = (id) => {
-    this.props.setNominatedPersonId({ personId: id });
   };
 
   openBrowseAll = () => {

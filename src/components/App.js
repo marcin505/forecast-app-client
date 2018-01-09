@@ -11,18 +11,12 @@ import rootSaga from 'redux/sagas/rootSaga';
 import DocumentTitle from 'react-document-title';
 import Header from 'components/header/Header.jsx'
 import Footer from 'components/footer/Footer.jsx'
-import ApiTest from 'components/apiTest/ApiTest.jsx';
 import Home from 'components/home/Home.jsx'
 import History from 'components/history/History.jsx'
-import AdminHome from 'components/admin/adminHome/AdminHome.jsx'
-import WinnerSelection from 'components/admin/winnerSelection/WinnerSelection.jsx'
 import  {
-  ADMIN_WINNER,
-  ADMIN_HOME,
   LOGIN,
   USER_HOME,
   USER_HISTORY,
-  API_TEST,
 } from 'routes/routesDefinitions.js';
 import LoginPage from 'components/loginPage/LoginPage.jsx'
 import PrivateRoute from 'routes/PrivateRoute.js';
@@ -43,9 +37,8 @@ class App extends Component {
         404
       </div>
     );
-
     return (
-      <DocumentTitle title="Members Community">
+      <DocumentTitle title="Weather App">
         <Provider store={store}>
           <Router history={history}>
             <div>
@@ -53,15 +46,12 @@ class App extends Component {
                 <Header />
                 <Switch>
                   <Route path={USER_HOME} component={Home}/>
-                  <Route path={API_TEST} component={ApiTest} />
                   <PrivateRoute
-                    auth={() => true}
+                    auth={() => false}
                     path={USER_HISTORY}
                     redirect={LOGIN}
                     component={History}
                   />
-                  <Route path={ADMIN_HOME} component={AdminHome}/>
-                  <Route path={`${ADMIN_WINNER}/:month/:year`} component={WinnerSelection}/>
                   <Route path={LOGIN} component={LoginPage}/>
                   <Route path='*' exact={true} component={errorSite}/>
                 </Switch>

@@ -10,7 +10,6 @@ import EmployeesLetter from 'components/home/employeesSearch/employeesLetter/Emp
 class Browse extends Component {
   static propTypes = {
     employees: PropTypes.object,
-    setNominatedPersonId: PropTypes.func.isRequired,
     closeAction: PropTypes.func.isRequired,
     ScrollLink: PropTypes.func.isRequired,
   };
@@ -40,7 +39,6 @@ class Browse extends Component {
       .map((letter, index) => (
         <EmployeesLetter
           employees={this.getEmployeesStartWithLetter(letter)}
-          setNominatedPersonId={this.props.setNominatedPersonId}
           letter={letter}
           key={index}
         />

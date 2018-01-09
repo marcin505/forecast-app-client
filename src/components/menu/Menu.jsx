@@ -4,7 +4,6 @@ import onClickOutside from 'react-onclickoutside'
 import PropTypes from 'prop-types';
 import {history} from 'routes/History.jsx';
 import {
-   ADMIN_HOME,
    USER_HOME,
    USER_HISTORY,
    USER_CONTACT,
@@ -59,23 +58,9 @@ class Menu extends Component {
       </div>
    );
 
-   renderAdminLinks = (currentUrl) => (
-      <div className="menu__links">
-         <LinkComponent
-            url={ADMIN_HOME}
-            name={'Start'}
-            currentUrl={currentUrl}
-            closeMenu={this.closeMenu}
-         >
-            Start
-         </LinkComponent>
-      </div>
-   );
-
    render() {
       const currentUrl = history.location.pathname;
       //todo: fix this flag:
-      const isAdmin = currentUrl.slice(1, 6) === 'admin';
       const {menuOpen} = this.props;
       const menuClasses = classNames({
          'menu': true,
@@ -94,10 +79,7 @@ class Menu extends Component {
                   <div className="logout-link">Logout</div>
                </div>
             </div>
-            {!isAdmin ?
-               this.renderUserLinks(currentUrl) :
-               this.renderAdminLinks(currentUrl)
-            }
+            {this.renderUserLinks(currentUrl)}
          </div>
       )
    }

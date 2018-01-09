@@ -7,7 +7,6 @@ class EmployeesSearchResults extends Component {
 
   static propTypes = {
     employees: PropTypes.object.isRequired,
-    setNominatedPersonId: PropTypes.func.isRequired,
   };
 
   renderEmployeesList = (employees) => (
@@ -16,7 +15,6 @@ class EmployeesSearchResults extends Component {
           <ImageRecord
             user={record}
             key={index}
-            setNominatedPersonId={this.props.setNominatedPersonId}
           />
         )
       )}

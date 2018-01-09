@@ -79,7 +79,7 @@ class LoginPage extends Component {
       return (
          <div className="login-page">
             <p className="community-logo">
-               <b>Members Community</b>
+               Weather App
             </p>
 
             <form onSubmit={this.onSubmit}>

@@ -7,7 +7,6 @@ class ImageRecord extends Component {
 
   static propTypes = {
     user: PropTypes.object.isRequired,
-    setNominatedPersonId: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
@@ -21,7 +20,7 @@ class ImageRecord extends Component {
     const name = user.get('name');
     const surname = user.get('surname');
     return (
-      <div className="image-record" ref={`user-${id}`} onClick={() => this.props.setNominatedPersonId(id)}>
+      <div className="image-record" ref={`user-${id}`} >
         <h1 className="image-record__heading">{`${name} ${surname}`}</h1>
         <img className="image" src={han} alt="e2"/>
         <div className="arrow"/>

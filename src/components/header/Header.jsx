@@ -25,7 +25,7 @@ class Header extends Component {
       <div className="header content-wrapper">
         <div className="header__logotypes">
           <Link className="members__logo" to={USER_HOME}>
-            Members Community
+            Weather App
           </Link>
         </div>
         <div className="hamburger" onClick={() => this.toggleMenu()}>

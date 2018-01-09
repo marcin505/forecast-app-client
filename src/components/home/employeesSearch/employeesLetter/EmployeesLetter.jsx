@@ -7,10 +7,8 @@ class EmployeesLetter extends Component {
 
   static propTypes = {
     employees: PropTypes.object.isRequired,
-    setNominatedPersonId: PropTypes.func.isRequired,
     letter: PropTypes.string.isRequired,
   };
-
   renderEmployeesList = employees => (
     <div className="employees-letter__list">
       {employees.map(record => {
@@ -18,7 +16,7 @@ class EmployeesLetter extends Component {
         const name = record.get('name');
         const surname = record.get('surname');
         return (
-          <div className="image-record" key={id} onClick={() => this.props.setNominatedPersonId(id)}>
+          <div className="image-record" key={id}>
             <div className="image-record__heading">{`${name} ${surname}`}</div>
             <img className="image" src={e2} alt="e2"/>
             <div className="arrow"/>
