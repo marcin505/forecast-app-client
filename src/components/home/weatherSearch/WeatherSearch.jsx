@@ -4,19 +4,19 @@ import { bindActionCreators } from 'redux';
 import { fromJS } from 'immutable';
 import PropTypes from 'prop-types';
 import { Link as ScrollLink } from 'react-scroll';
-import { setNominatedPersonId } from 'redux/actions/employeesActions.js';
+import { setNominatedPersonId } from 'redux/actions/weatherActions.js';
 import SearchInput from 'components/common/searchInput/SearchInput.jsx'
-import EmployeesSearchResults from 'components/home/employeesSearch/employeesSearchResults/EmployeesSearchResults.jsx'
-import Browse from 'components/home/employeesSearch/browse/Browse.jsx';
+import WeatherSearchResults from 'components/home/weatherSearch/weatherSearchResults/WeatherSearchResults.jsx'
+import Browse from 'components/home/weatherSearch/browse/Browse.jsx';
 import SectionHeader from 'components/common/sectionHeader/SectionHeader.jsx';
 import classNames from 'classnames';
-import './EmployeesSearch.css';
+import './WeatherSearch.css';
 import _ from 'lodash';
 
-export class EmployeesSearch extends Component {
+export class WeatherSearch extends Component {
 
   static propTypes = {
-    employees: PropTypes.object.isRequired,
+    weather: PropTypes.object.isRequired,
     expanded: PropTypes.bool.isRequired,
     setExpandedSections: PropTypes.func.isRequired,
   };
@@ -32,9 +32,9 @@ export class EmployeesSearch extends Component {
     }
   };
 
-  searchEmployees = _.debounce(() => {
-    const {employees} = this.props;
-      let foundRecords = employees.filter(record => {
+  searchWeather = _.debounce(() => {
+    const {weather} = this.props;
+      let foundRecords = weather.filter(record => {
         const surname =record.get('surname');
         const name = record.get('name');
         const user = `${name} ${surname}`.toLowerCase();
@@ -54,7 +54,7 @@ export class EmployeesSearch extends Component {
 
   onChangeInputHandler = (e) => {
     this.setState({ searchString : e.target.value });
-    this.searchEmployees();
+    this.searchWeather();
   };
 
   resetSearchString = () => {
@@ -68,7 +68,7 @@ export class EmployeesSearch extends Component {
       offset: -50,
     };
     this.setState({ placeHolder: '', isBrowseAll: false });
-    this.props.setExpandedSections('employeesSearch', true, scrollProperties);
+    this.props.setExpandedSections('weatherSearch', true, scrollProperties);
   };
 
   onBlur = () => {
@@ -77,18 +77,18 @@ export class EmployeesSearch extends Component {
 
   closeSearchMode = () => {
     this.setState({ searchString: '',  placeHolder: 'Add your Nominee' });
-    this.props.setExpandedSections('employeesSearch', false);
+    this.props.setExpandedSections('weatherSearch', false);
     this.setState({ foundRecords:fromJS([])});
   };
 
   openBrowseAll = () => {
-    this.props.setExpandedSections('employeesSearch', true);
+    this.props.setExpandedSections('weatherSearch', true);
     this.setState({ isBrowseAll: true,  searchString: '', placeHolder: 'Add your Nominee', foundRecords:fromJS([]) });
   };
 
   renderBrowseAll = () => (
     <Browse
-      employees={this.props.employees}
+      weather={this.props.weather}
       setNominatedPersonId={this.setNominatedPersonId}
       closeAction={this.props.setExpandedSections}
       ScrollLink={ScrollLink}
@@ -99,14 +99,14 @@ export class EmployeesSearch extends Component {
     const { expanded } = this.props;
     const { placeHolder, isBrowseAll } = this.state;
 
-    const employeesSearchClasses = classNames({
-      'employees-search': true,
-      'employees-search--dark': expanded,
-      'employees-search--additional-padding': expanded,
+    const weatherSearchClasses = classNames({
+      'weather-search': true,
+      'weather-search--dark': expanded,
+      'weather-search--additional-padding': expanded,
     });
 
     return (
-      <div className={employeesSearchClasses} id="employees-search">
+      <div className={weatherSearchClasses} id="weather-search">
         <div className="content-wrapper">
           {expanded ?
           <SectionHeader
@@ -141,8 +141,8 @@ export class EmployeesSearch extends Component {
           </div>
           {expanded &&
           <div className="">
-            <EmployeesSearchResults
-              employees={this.state.foundRecords}
+            <WeatherSearchResults
+              weather={this.state.foundRecords}
               setNominatedPersonId={this.setNominatedPersonId}
             />
             {isBrowseAll && this.renderBrowseAll()}
@@ -161,5 +161,5 @@ const mapDispatchToProps = dispatch => ({
   )
 });
 
-export default connect(null, mapDispatchToProps)(EmployeesSearch);
+export default connect(null, mapDispatchToProps)(WeatherSearch);
 

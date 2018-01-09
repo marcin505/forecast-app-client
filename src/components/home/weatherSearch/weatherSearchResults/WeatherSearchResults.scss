@@ -1,10 +1,10 @@
 @import 'assets/stylesheets/variables.scss';
 @import 'assets/stylesheets/mixins.scss';
 
-.employees-search-results {
+.weather-search-results {
   margin-top: 20px;
   padding-top: 20px;
-  .employees-search__list {
+  .weather-search__list {
     display: flex;
     flex-wrap: wrap;
   }

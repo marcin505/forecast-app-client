@@ -4,29 +4,29 @@ import Scroll from 'react-scroll';
 import { lettersArray } from 'components/common/utils/functionUtils.js';
 import './Browse.css';
 import CloseContainer from 'components/common/closeContainer/CloseContainer.jsx';
-import EmployeesLetter from 'components/home/employeesSearch/employeesLetter/EmployeesLetter.jsx';
+import WeatherLetter from 'components/home/weatherSearch/weatherLetter/WeatherLetter.jsx';
 
 
 class Browse extends Component {
   static propTypes = {
-    employees: PropTypes.object,
+    weather: PropTypes.object,
     closeAction: PropTypes.func.isRequired,
     ScrollLink: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
-    employees: []
+    weather: []
   };
 
   scrollToTop = () => {
     Scroll.animateScroll.scrollToTop();
   };
 
-  generateLetters = (employees) => {
+  generateLetters = (weather) => {
     const { ScrollLink } = this.props;
     return (
     <div className="browse__letters">
-      {lettersArray(employees).map((letter, index) => (
+      {lettersArray(weather).map((letter, index) => (
         <ScrollLink className="letter" to={letter} spy={true} smooth={true} duration={400} key={index} offset={-100}>
           {letter}
         </ScrollLink>
@@ -34,38 +34,38 @@ class Browse extends Component {
     </div>
   )};
 
-  generateLettersSections = (employees) => (
-    lettersArray(employees)
+  generateLettersSections = (weather) => (
+    lettersArray(weather)
       .map((letter, index) => (
-        <EmployeesLetter
-          employees={this.getEmployeesStartWithLetter(letter)}
+        <WeatherLetter
+          weather={this.getWeatherStartWithLetter(letter)}
           letter={letter}
           key={index}
         />
       ))
   );
 
-  getEmployeesStartWithLetter = letter => {
-    const { employees } = this.props;
-    return employees.filter(record => {
+  getWeatherStartWithLetter = letter => {
+    const { weather } = this.props;
+    return weather.filter(record => {
       return (record.get('surname').slice(0,1) === letter);
     });
   };
 
-  closeEmployeesSearch = () => {
-    this.props.closeAction('employeesSearch', false);
+  closeWeatherSearch = () => {
+    this.props.closeAction('weatherSearch', false);
   };
   
   render() {
-    const { employees } = this.props;
+    const { weather } = this.props;
     return (
       <div className="browse">
-        {this.generateLetters(employees)}
-        {this.generateLettersSections(employees)}
+        {this.generateLetters(weather)}
+        {this.generateLettersSections(weather)}
         <div className="bottom-container">
           <span onClick={() => this.scrollToTop()}>Scroll the top!</span>
           <CloseContainer
-            closeAction={this.closeEmployeesSearch}
+            closeAction={this.closeWeatherSearch}
           />
         </div>
       </div>

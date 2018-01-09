@@ -24,7 +24,7 @@ class SearchInput extends Component {
 
   render() {
     const { value, onChange, onFocus, onBlur, searchMode, placeHolder } = this.props;
-    const inputName = 'employeesSearch';
+    const inputName = 'weatherSearch';
     const searchInputClasses = classNames({
       'search-input': true,
       'search-mode': searchMode,

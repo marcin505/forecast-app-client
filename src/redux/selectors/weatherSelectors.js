@@ -1,32 +1,32 @@
 import { createSelector } from 'reselect';
 
-const getEmployeesRoot = state => (state.employees);
+const getWeatherRoot = state => (state.weather);
 
 /* Checks whether user is logged into application */
 
-export const getEmployees = createSelector(
-  getEmployeesRoot,
-    root => (root.get('employees'))
+export const getWeather = createSelector(
+  getWeatherRoot,
+    root => (root.get('weather'))
 );
 
 export const getNominatedPersonId = createSelector(
-  getEmployeesRoot,
+  getWeatherRoot,
     root => (root.get('nominatedPersonId')
   )
 );
 
 export const getNominationAdded = createSelector(
-  getEmployeesRoot,
+  getWeatherRoot,
     root => (root.get('nominationAdded')
  )
 );
 
 export const getVotingMonth = createSelector(
-  getEmployeesRoot,
+  getWeatherRoot,
     root => (root.get('votingMonth'))
 );
 
-export const getEmployeesReducer = createSelector(
-  getEmployeesRoot,
+export const getWeatherReducer = createSelector(
+  getWeatherRoot,
     root => (root)
 );

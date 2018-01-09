@@ -3,21 +3,21 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {fromJS} from 'immutable';
 import {
-   getEmployees,
-} from 'redux/selectors/employeesSelectors.js';
-// import {} from 'redux/actions/employeesActions.js';
+   getWeather,
+} from 'redux/selectors/weatherSelectors.js';
+// import {} from 'redux/actions/weatherActions.js';
 import PropTypes from 'prop-types';
 import {Element, scroller} from 'react-scroll';
 import TransitionGroup from 'react-addons-transition-group';
 import {defaultScrollProperties} from 'components/common/utils/functionUtils.js';
-import EmployeesSearch from 'components/home/employeesSearch/EmployeesSearch.jsx';
+import WeatherSearch from 'components/home/weatherSearch/WeatherSearch.jsx';
 import Modal from 'components/common/modal/Modal.jsx';
 import './Home.css';
 
 class Home extends Component {
 
    static propTypes = {
-      employees: PropTypes.object.isRequired,
+      weather: PropTypes.object.isRequired,
    };
 
    constructor() {
@@ -32,13 +32,13 @@ class Home extends Component {
    };
 
    resetExpandedSections = () => (fromJS({
-      employeesSearch: false,
+      weatherSearch: false,
    }));
 
-   renderEmployeesSearch = () => (
-      <EmployeesSearch
-         employees={this.props.employees}
-         expanded={this.state.expandedSections.toJS().employeesSearch}
+   renderWeatherSearch = () => (
+      <WeatherSearch
+         weather={this.props.weather}
+         expanded={this.state.expandedSections.toJS().weatherSearch}
          setExpandedSections={this.setExpandedSections}
       />
    );
@@ -76,8 +76,8 @@ class Home extends Component {
       const { isModal} = this.state;
       return (
          <div className="home">
-            <Element name="employeesSearch">
-              {this.renderEmployeesSearch()}
+            <Element name="weatherSearch">
+              {this.renderWeatherSearch()}
             </Element>
             <TransitionGroup>
                {isModal && this.renderModal(this.state.modalMessage)}
@@ -95,7 +95,7 @@ class Home extends Component {
 // });
 
 const mapStateToProps = state => ({
-   employees: getEmployees(state),
+   weather: getWeather(state),
 });
 
 export default connect(mapStateToProps)(Home);

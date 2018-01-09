@@ -1,5 +1,5 @@
 import {fromJS, Map, List, Seq} from 'immutable';
-import { initialState } from 'redux/reducers/employeesReducer.js';
+import { initialState } from 'redux/reducers/weatherReducer.js';
 
 const immutableExamples = () =>  {
 
@@ -74,12 +74,12 @@ const immutableExamples = () =>  {
    console.log(61, merged.toJS()); //{a: 30, b: 50, c: 60, d: 70}
 
 
-   const employeesArray = initialState
-      .get('employees')
+   const weatherArray = initialState
+      .get('weather')
       .map(x=> fromJS({[x.get('surname')]: false,
       }));
 
-   console.log(79, employeesArray.toJS());
+   console.log(79, weatherArray.toJS());
 };
 
 

@@ -1,10 +1,10 @@
 @import 'assets/stylesheets/variables.scss';
 @import 'assets/stylesheets/mixins.scss';
 
-.employees-search {
+.weather-search {
   padding: $expanding-modules-top-padding 0 0;
   margin-bottom: $expanding-modules-bottom-margin;
-  &.employees-search--additional-padding {
+  &.weather-search--additional-padding {
     padding-bottom:80vh;
   }
   .section-header {
@@ -16,9 +16,9 @@
     }
   }
 
-  .employees-search__top {
+  .weather-search__top {
     display: flex;
-    .employees-search__info {
+    .weather-search__info {
       @include heading-red-sm();
       &.expanded {
         margin-bottom: 100px;
@@ -44,7 +44,7 @@
 
   @include background-transition;
 
-  &.employees-search--dark {
+  &.weather-search--dark {
     background: $background-grey;
     min-height: 300px;
     @include background-transition;

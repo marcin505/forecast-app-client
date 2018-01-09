@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getEmployeesReducer } from 'redux/selectors/employeesSelectors.js';
+import { getWeatherReducer } from 'redux/selectors/weatherSelectors.js';
 import HistoryUser from 'components/history/historyUser/HistoryUser.jsx';
 import './History.css';
 
@@ -42,7 +42,7 @@ class History extends Component {
 }
 
 const mapStateToProps = state => ({
-  history: getEmployeesReducer(state).get('history'),
+  history: getWeatherReducer(state).get('history'),
 });
 
 export default connect(mapStateToProps, null)(History);

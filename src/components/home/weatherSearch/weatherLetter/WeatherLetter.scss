@@ -1,15 +1,15 @@
 @import 'assets/stylesheets/variables.scss';
 @import 'assets/stylesheets/mixins.scss';
 
-.employees-letter {
+.weather-letter {
   margin-top: 30px;
-  .employees-letter__heading {
+  .weather-letter__heading {
     font-family: Helvetica-Heavy, Arial, sans-serif;
     font-size: 36px;
     color: $brand-blue;
   }
 
-  .employees-letter__list {
+  .weather-letter__list {
     display: flex;
     flex-wrap: wrap;
     margin: 20px 0 20px;

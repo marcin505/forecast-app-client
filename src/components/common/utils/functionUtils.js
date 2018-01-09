@@ -13,9 +13,9 @@ export const monthsArray = [
   'December'
 ];
 
-export const lettersArray = (employees) => {
+export const lettersArray = (weather) => {
   let arr = [];
-  employees.map(record=> {
+  weather.map(record=> {
     const letter = record.get('surname').slice(0,1);
     if (arr.indexOf(letter) === -1) {
       arr.push(letter);

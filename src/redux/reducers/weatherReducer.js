@@ -8,7 +8,7 @@ import {
 } from 'redux/actions/actionTypes';
 
 export const initialState = fromJS({
-   employees: fromJS([
+   weather: fromJS([
       {
          name: 'Han',
          surname: 'Solo',
@@ -238,7 +238,7 @@ export const initialState = fromJS({
    votingYear: new Date().getFullYear(),
 });
 
-export default function employeesReducer(state = initialState, {type, payload}) {
+export default function weatherReducer(state = initialState, {type, payload}) {
    switch (type) {
       case SET_NOMINATED_PERSON_ID:
          return state
@@ -247,7 +247,7 @@ export default function employeesReducer(state = initialState, {type, payload}) 
          return state
             .set('nominationAdded', payload.nominationAdded);
       case ADD_NOMINATION:{
-        const employees = state.get('employees').map(record=> {
+        const weather = state.get('weather').map(record=> {
            if (payload.personId === record.get('id')) {
               record = record.update('nominations', arr => arr.push(fromJS({
                  id: 663,
@@ -256,12 +256,12 @@ export default function employeesReducer(state = initialState, {type, payload}) 
            }
            return record;
         });
-        return state.set('employees', employees);
+        return state.set('weather', weather);
       }
       case RAISE_VOTES: {
          // console.log(payload);
-         const employees = state
-            .get('employees')
+         const weather = state
+            .get('weather')
             .map(record=> {
                   if (payload.personId === record.get('id')) {
                      const nominations = record
@@ -277,7 +277,7 @@ export default function employeesReducer(state = initialState, {type, payload}) 
                   }
                }
             );
-         return state.set('employees', employees);
+         return state.set('weather', weather);
       }
       default:{
          return state;

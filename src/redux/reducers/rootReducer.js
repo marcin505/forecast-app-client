@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import auth from 'redux/reducers/authReducer';
-import employees from 'redux/reducers/employeesReducer'
+import weather from 'redux/reducers/weatherReducer'
 
 const rootReducer = combineReducers({
   auth,
-  employees,
+  weather,
 });
 
 export default rootReducer;

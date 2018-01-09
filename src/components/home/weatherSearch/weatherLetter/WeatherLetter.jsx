@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './EmployeesLetter.css';
+import './WeatherLetter.css';
 import e2 from 'assets/images/people/han_solo.png';
 
-class EmployeesLetter extends Component {
+class WeatherLetter extends Component {
 
   static propTypes = {
-    employees: PropTypes.object.isRequired,
+    weather: PropTypes.object.isRequired,
     letter: PropTypes.string.isRequired,
   };
-  renderEmployeesList = employees => (
-    <div className="employees-letter__list">
-      {employees.map(record => {
+  renderWeatherList = weather => (
+    <div className="weather-letter__list">
+      {weather.map(record => {
         const id = record.get('id');
         const name = record.get('name');
         const surname = record.get('surname');
@@ -27,16 +27,16 @@ class EmployeesLetter extends Component {
   );
 
   render() {
-    const { employees, letter } = this.props;
+    const { weather, letter } = this.props;
     return (
-      <div className="employees-letter" id={letter}>
-        <div className="employees-letter__heading">
+      <div className="weather-letter" id={letter}>
+        <div className="weather-letter__heading">
           {letter}
         </div>
-        {this.renderEmployeesList(employees)}
+        {this.renderWeatherList(weather)}
       </div>
     )
   }
 }
 
-export default EmployeesLetter;
+export default WeatherLetter;
