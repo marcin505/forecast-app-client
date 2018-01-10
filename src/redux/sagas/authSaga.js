@@ -1,24 +1,27 @@
 //import { history } from 'components/router/History';
 import { takeLatest, call, put } from 'redux-saga/effects';
-import { LOGGIN } from 'redux/actions/actionTypes';
+import { LOGGIN, LOGOUT, LOGOUT_SUCCESS } from 'redux/actions/actionTypes';
 import * as AuthActions from 'redux/actions/authActions';
-//import { EMAIL_TOKEN, ADMIN_MIGRATIONS, USER_MIGRATION_OVERVIEW, MAIN } from 'components/router/Routes';
-//import * as AuthActions from 'redux/actions/authActions';
-import { loginRequest } from 'api/authAPI.js';
-//import { ADMIN } from 'api/userTypes';
+import { loginRequest, logoutRequest } from 'api/authAPI.js';
 
 export function* loginSaga({ payload: { email, password } }) {
     try {
-    const user = yield call(loginRequest, email, password);
-    console.log(user);
-    yield put(AuthActions.loginSuccess({ email }));
+    const user = yield call(loginRequest, email, password); 
+    
+    yield put(AuthActions.loginSuccess({ email: user.email, token: user.token }));
   } catch (error) {
     yield put(AuthActions.loginFailed());
   }
 }
 
+export function* logoutSaga() {
+  yield call(logoutRequest);
+  yield put(AuthActions.logoutSuccess());
+}
+
 export default function* watch() {
   yield* [
     takeLatest(LOGGIN, loginSaga),
+    takeLatest(LOGOUT, logoutSaga)
   ];
 }

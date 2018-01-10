@@ -3,6 +3,8 @@
 export const LOGGIN = 'LOGGIN';
 export const LOGGIN_FAILED = 'LOGGIN_FAILED';
 export const LOGGIN_SUCCESS = 'LOGGIN_SUCCESS';
+export const LOGOUT = 'LOGOUT';
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 
 /* Employers */
 export const SET_NOMINATED_PERSON_ID = 'SET_NOMINATED_PERSON_ID';

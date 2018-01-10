@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {getAuth} from 'redux/selectors/authSelectors.js';
+import {logout} from 'redux/actions/authActions.js';
 import './Header.css';
 import Menu from 'components/menu/Menu.jsx';
 import {history} from 'routes/History.jsx';
@@ -19,9 +23,13 @@ class Header extends Component {
   toggleMenu = () => {
     this.setState({ menuOpen: !this.state.menuOpen })
   };
+  logout = () => {
+    this.props.logout();
+  }
 
-  renderHeader = () => (
-    <div className="header-container">
+  render() {
+    return (
+      <div className="header-container">
       <div className="header content-wrapper">
         <div className="header__logotypes">
           <Link className="members__logo" to={USER_HOME}>
@@ -34,23 +42,28 @@ class Header extends Component {
           <div className="bar3"></div>
         </div>
       </div>
-      <Menu
+      {<Menu
         menuOpen={this.state.menuOpen}
         toggleMenu={this.toggleMenu}
-        />
+        logout = {this.logout}
+        loggedUser = {this.props.loggedUser}
+      />}
     </div>
-  );
-
-  render() {
-    const isLogged = history.location.pathname !== LOGIN;
-    return (
-      <div>
-        {isLogged && this.renderHeader()}
-      </div>
+    
     )
   };
 }
 
-export default Header;
+const mapStateToProps = state => {
+ return ({
+    loggedUser: getAuth(state)
+ });
+};
+
+const mapDispatchToProps = dispatch => ({
+  logout: bindActionCreators(logout, dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
 
 

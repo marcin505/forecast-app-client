@@ -1,16 +1,17 @@
 import React, {Component} from 'react';
 import './AuthPage.css';
+import {toJS} from 'immutable';
 import TextInput from 'components/common/textInput/TextInput.jsx'
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {login} from 'redux/actions/authActions.js';
-import {isUserLogged} from 'redux/selectors/authSelectors.js';
+import {getAuth} from 'redux/selectors/authSelectors.js';
 import PropTypes from 'prop-types';
 
 class AuthPage extends Component {
 
    static propTypes = {
-      isUserLogged: PropTypes.bool.isRequired,
+        isLogged: PropTypes.bool.isRequired,
    };
 
    constructor() {
@@ -115,7 +116,7 @@ class AuthPage extends Component {
 
 const mapStateToProps = state => {
    return ({
-      isUserLogged: isUserLogged(state),
+      isLogged: getAuth(state).get('isLogged'),
    });
 };
 

@@ -17,6 +17,8 @@ class Menu extends Component {
    static propTypes = {
       menuOpen: PropTypes.bool.isRequired,
       toggleMenu: PropTypes.func.isRequired,
+      logout : PropTypes.func.isRequired,
+      loggedUser: PropTypes.object.isRequired,
    };
 
    closeMenu = () => {
@@ -66,6 +68,8 @@ class Menu extends Component {
          'menu': true,
          'open': menuOpen
       });
+      const { logout, loggedUser} = this.props;
+      const email = loggedUser.get('email');
       return (
          <div className={menuClasses}>
             <div className="menu__top">
@@ -75,8 +79,8 @@ class Menu extends Component {
                <img className="user-img" src={han} alt="han"/>
                <div className="menu__credentials-container">
                   <div className="logged-as">You are logged as:</div>
-                  {/* <div className="credentials">Han z Solo</div>
-                  <div className="logout-link">Logout</div> */}
+                   <div className="credentials">{email}</div>
+                   <div className="logout-link" onClick={logout}>Logout</div>
                </div>
             </div>
             {this.renderUserLinks(currentUrl)}
@@ -84,5 +88,6 @@ class Menu extends Component {
       )
    }
 }
+
 
 export default onClickOutside(Menu);

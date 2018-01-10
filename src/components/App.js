@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import 'assets/stylesheets/Styles.css';
-import 'assets/stylesheets/Responsive.css';
+// import {bindActionCreators} from 'redux';
 import { history } from 'routes/History.jsx';
 import { Provider } from 'react-redux';
 import { Router, Switch, Route } from 'react-router-dom';
@@ -13,12 +12,14 @@ import Header from 'components/header/Header.jsx'
 import Footer from 'components/footer/Footer.jsx'
 import Home from 'components/home/Home.jsx'
 import History from 'components/history/History.jsx'
+import 'assets/stylesheets/Styles.css';
+import 'assets/stylesheets/Responsive.css';
 import  {
   LOGIN,
   USER_HOME,
   USER_HISTORY,
 } from 'routes/routesDefinitions.js';
-import AuthPage from 'components/authPage/AuthPage.jsx';
+import AuthPage from 'components/authPage/AuthPage.jsx'
 import PrivateRoute from 'routes/PrivateRoute.js';
 const sagaMiddleware = createSagaMiddleware();
 
@@ -32,6 +33,7 @@ const store =
 sagaMiddleware.run(rootSaga);
 class App extends Component {
   render() {
+    const {isLogged} = this.props;
     const errorSite = () => (
       <div className="errorSite">
         404

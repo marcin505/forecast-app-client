@@ -1,33 +1,41 @@
 import { fromJS } from 'immutable';
 import {
   LOGGIN_SUCCESS,
-  LOGGIN_FAILED
+  LOGGIN_FAILED,
+  LOGOUT,
+  LOGOUT_SUCCESS,
 } from 'redux/actions/actionTypes';
 
+const getToken = () => (localStorage.getItem('token') || '');
+
 export const initialState = fromJS({
-  invalidEmail: false,
-  invalidEmailOrPassword: false,
-  logged: false,
+  isLogged: false,
+  accessDenied: false,
   email: '',
-  user: null,
-  token: null,
+  token: '',
 });
 
-export default function authReducer(state = initialState, { type, payload }) {
+export default function authReducer(state = initialState, { type,  payload }) {
   switch (type) {
     case LOGGIN_SUCCESS:
+      localStorage.setItem('token', payload.token);
       return state
-        .set('logged', true)
-        .set('invalidEmail', false)
-        .set('email', payload.email);
+        .set('isLogged', true)
+        .set('accessDenied', false)
+        .set('email', payload.email)
+        .set('token', payload.token)
     case LOGGIN_FAILED:
       return state
-        .set('logged', false)
-        .set('invalidEmail', false)
-        .set('email', '');
+        .set('isLogged', false)
+        .set('accessDenied', true)
+        .set('email', '')
+        .set('token', getToken())
+    case LOGOUT_SUCCESS: 
+      return initialState;         
     default:
     {
       return state;
     }
   }
 };
+
