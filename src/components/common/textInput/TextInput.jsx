@@ -5,6 +5,7 @@ import './TextInput.css';
 
 class TextInput extends Component {
   static propTypes = {
+    type: PropTypes.string.isRequired,
     inputName: PropTypes.string.isRequired,
     placeholder: PropTypes.string,
     value: PropTypes.string.isRequired,
@@ -26,6 +27,7 @@ class TextInput extends Component {
 
   render() {
     const {
+      type,
       inputName,
       placeholder,
       value,
@@ -42,7 +44,8 @@ class TextInput extends Component {
     });
     return (
       <div className="text-input-wrapper">
-        <input type="text"
+        <input 
+          type={type}
           name={inputName}
           placeholder={placeholder}
           value={value}

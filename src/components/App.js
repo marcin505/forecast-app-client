@@ -18,7 +18,7 @@ import  {
   USER_HOME,
   USER_HISTORY,
 } from 'routes/routesDefinitions.js';
-import LoginPage from 'components/loginPage/LoginPage.jsx'
+import AuthPage from 'components/authPage/AuthPage.jsx';
 import PrivateRoute from 'routes/PrivateRoute.js';
 const sagaMiddleware = createSagaMiddleware();
 
@@ -52,7 +52,7 @@ class App extends Component {
                     redirect={LOGIN}
                     component={History}
                   />
-                  <Route path={LOGIN} component={LoginPage}/>
+                  <Route path={LOGIN} component={AuthPage}/>
                   <Route path='*' exact={true} component={errorSite}/>
                 </Switch>
               </div>

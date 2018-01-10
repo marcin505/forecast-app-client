@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './LoginPage.css';
+import './AuthPage.css';
 import TextInput from 'components/common/textInput/TextInput.jsx'
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -7,7 +7,7 @@ import {login} from 'redux/actions/authActions.js';
 import {isUserLogged} from 'redux/selectors/authSelectors.js';
 import PropTypes from 'prop-types';
 
-class LoginPage extends Component {
+class AuthPage extends Component {
 
    static propTypes = {
       isUserLogged: PropTypes.bool.isRequired,
@@ -16,8 +16,8 @@ class LoginPage extends Component {
    constructor() {
       super();
       this.state = {
-         email: '',
-         password: '',
+         email: 'mariola@mariola.pl',
+         password: 'kurde',
          errors: {},
          isLoading: false,
          emailPlaceholder: 'Email',
@@ -33,7 +33,7 @@ class LoginPage extends Component {
          var pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
          return !!email.match(pattern);
       };
-      const validatePassword = () => password.length > 5;
+      const validatePassword = () => password.length > 4;
       if (validateEmail() && validatePassword()) {
          this.setState({errors: {}});
          isFormValid = true;
@@ -56,10 +56,11 @@ class LoginPage extends Component {
       this.setState({[name]: value})
    };
 
-   onSubmit = (e) => {
+   submitForm = (e) => {
       e.preventDefault();
+      const {email, password} = this.state;
       if (this.isFormValid()) {
-         this.props.login({email: this.state.email});
+         this.props.login({email, password});
       }
    };
 
@@ -76,15 +77,16 @@ class LoginPage extends Component {
 
    render() {
       const {email, password, errors, emailPlaceholder, passwordPlaceholder} = this.state;
+      const {login} = this.props;
       return (
          <div className="login-page">
             <p className="community-logo">
                Weather App
             </p>
-
-            <form onSubmit={this.onSubmit}>
+            <form onSubmit={this.submitForm}>
                <TextInput
-                  inputName={'email'}
+                  type={'text'}
+                  inputName={emailPlaceholder}
                   value={email}
                   disabled={false}
                   onChange={this.onChange}
@@ -94,6 +96,7 @@ class LoginPage extends Component {
                   onBlur={() => this.onBlur('emailPlaceholder', 'email')}
                />
                <TextInput
+                  type={'password'}
                   inputName={'password'}
                   value={password}
                   disabled={false}
@@ -120,4 +123,4 @@ const mapDispatchToProps = dispatch => ({
    login: bindActionCreators(login, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
+export default connect(mapStateToProps, mapDispatchToProps)(AuthPage);

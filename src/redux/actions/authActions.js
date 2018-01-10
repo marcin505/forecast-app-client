@@ -4,10 +4,11 @@ import {
   LOGGIN_SUCCESS,
 } from 'redux/actions/actionTypes';
 
-export const login = ({ email }) => ({
+export const login = ({ email, password }) => ({
   type: LOGGIN,
   payload: {
     email,
+    password
   },
 });
 

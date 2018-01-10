@@ -1,1 +1,1 @@
-export const URL = 'http://www.kurde555.pl/';
+export const URL = 'http://localhost:8080';

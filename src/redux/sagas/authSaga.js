@@ -4,12 +4,13 @@ import { LOGGIN } from 'redux/actions/actionTypes';
 import * as AuthActions from 'redux/actions/authActions';
 //import { EMAIL_TOKEN, ADMIN_MIGRATIONS, USER_MIGRATION_OVERVIEW, MAIN } from 'components/router/Routes';
 //import * as AuthActions from 'redux/actions/authActions';
-import { loginRequest } from 'api/loginAPI.js';
+import { loginRequest } from 'api/authAPI.js';
 //import { ADMIN } from 'api/userTypes';
 
-export function* loginSaga({ payload: { email } }) {
+export function* loginSaga({ payload: { email, password } }) {
     try {
-    yield call(loginRequest, email);
+    const user = yield call(loginRequest, email, password);
+    console.log(user);
     yield put(AuthActions.loginSuccess({ email }));
   } catch (error) {
     yield put(AuthActions.loginFailed());
