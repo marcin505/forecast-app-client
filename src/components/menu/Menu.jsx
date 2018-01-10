@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import {history} from 'routes/History';
 import {
    USER_HOME,
-   USER_HISTORY,
+   PROFILE,
    USER_CONTACT,
 } from 'routes/routesDefinitions.js';
 import LinkComponent from 'components/menu/linkComponent/LinkComponent.jsx'
@@ -41,7 +41,7 @@ class Menu extends Component {
             Start
          </LinkComponent>
          <LinkComponent
-            url={USER_HISTORY}
+            url={PROFILE}
             name={'Profile'}
             currentUrl={currentUrl}
             closeMenu={this.closeMenu}

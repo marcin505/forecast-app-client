@@ -1,33 +1,42 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { getWeatherReducer } from 'redux/selectors/weatherSelectors.js';
+import {getWeatherReducer} from 'redux/selectors/weatherSelectors.js';
 import './Profile.css';
 
 class Profile extends Component {
 
-  static propTypes = {
-    history: PropTypes.object,
-  };
+   static propTypes = {
+      loggedUser: PropTypes.object,
+   };
 
-  static defaultProps = {
-    history: []
-  };
+   static defaultProps = {
 
-  render() {
-    const {history} = this.props;
-    return (
-      <div className="history">
-          <div className="content-wrapper">
-              <h1 className="heading-lg semi-bold">
-                Profile
-              </h1>
-            <hr/>
-          </div>
+   };
 
-      </div>
-    )
-  }
+   render() {
+      const loggedUser = this.props.loggedUser.toJS();
+      const userData = {email : loggedUser.email, id: loggedUser._id }
+
+      console.log(19, loggedUser);
+      return (
+         <div className="profile">
+            <div className="content-wrapper">
+               <h1 className="heading-lg semi-bold">
+                  Profile
+               </h1>
+               <hr/>
+               {
+                  Object.keys(userData).map((k, index) => (
+                     <div key={index} className="profile__record">
+                        <div className="profile__record-key">{k}:</div>
+                        <div className="profile__record-value">{userData[k]}</div>
+                     </div>
+                  ))
+               }
+            </div>
+         </div>
+      )
+   }
 }
-
 
 export default Profile;

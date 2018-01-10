@@ -6,7 +6,7 @@ export const LOGIN = '/login';
 /* USER ROUTES */
 export const USER = '/user/';
 export const USER_HOME = '/home';
-export const USER_HISTORY = '/profile';
+export const PROFILE = '/profile';
 export const USER_CONTACT = '/contact';
 
 

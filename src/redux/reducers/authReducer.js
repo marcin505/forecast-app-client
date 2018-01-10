@@ -11,6 +11,7 @@ export const initialState = fromJS({
   isLogged: false,
   accessDenied: false,
   email: '',
+  _id: null,
   token: '',
 });
 
@@ -23,12 +24,13 @@ export default function authReducer(state = initialState, { type,  payload }) {
         .set('accessDenied', false)
         .set('email', payload.email)
         .set('token', payload.token)
+        .set('_id', payload._id);
     case LOGGIN_FAILED:
       return state
         .set('isLogged', false)
         .set('accessDenied', true)
         .set('email', '')
-        .set('token', getToken())
+        .set('token', getToken());
     case LOGOUT:
       return initialState;         
     default:

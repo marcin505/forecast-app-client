@@ -16,11 +16,12 @@ export const login = ({ email, password }) => {
   },
 })};
 
-export const loginSuccess = ({ email, token }) => ({
+export const loginSuccess = ({ email, token, _id }) => ({
   type: LOGGIN_SUCCESS,
   payload: {
     email,
     token,
+    _id,
   },
 });
 

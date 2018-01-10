@@ -1,17 +1,22 @@
 @import 'assets/stylesheets/variables.scss';
 
-.history {
+.profile {
   color: #fff;
   padding: 180px 0 100px;
-
-  .history__header {
-    width: 100%;
-  }
 
   .heading-lg {
     color: $brand-blue;
     cursor: default;
-    margin-bottom:20px;
+    margin-bottom: 20px;
+  }
+
+  .profile__record {
+    display: flex;
+    justify-content: flex-start;
+
+    .profile__record-key {
+      width:70px;
+    }
   }
 
 }

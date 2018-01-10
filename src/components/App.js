@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getAuth } from 'redux/selectors/authSelectors.js';
-import PropTypes from 'prop-types';
 import { history } from 'routes/History';
 import { Provider } from 'react-redux';
 import { Router, Switch, Route } from 'react-router-dom';
@@ -9,13 +8,13 @@ import DocumentTitle from 'react-document-title';
 import Header from 'components/header/Header.jsx'
 import Footer from 'components/footer/Footer.jsx'
 import Home from 'components/home/Home.jsx'
-import History from 'components/profile/Profile.jsx'
+import Profile from 'components/profile/Profile'
 import 'assets/stylesheets/Styles.css';
 import 'assets/stylesheets/Responsive.css';
 import {
   LOGIN,
   USER_HOME,
-  USER_HISTORY,
+  PROFILE,
 } from 'routes/routesDefinitions.js';
 import AuthPage from 'components/authPage/AuthPage.jsx'
 import PrivateRoute from 'routes/PrivateRoute.js';
@@ -44,9 +43,10 @@ const App = ({store, loggedUser}) => {
                 />
                 <PrivateRoute
                   auth={() => isLogged}
-                  path={USER_HISTORY}
+                  path={PROFILE}
                   redirect={LOGIN}
-                  component={History}
+                  component={Profile}
+                  loggedUser={loggedUser}
                 />
                  <PrivateRoute
                   auth={() => !isLogged}
