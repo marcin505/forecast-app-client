@@ -34,34 +34,21 @@ class Menu extends Component {
       <div className="menu__links">
          <LinkComponent
             url={USER_HOME}
-            name={'Start'}
+            name={'Home'}
             currentUrl={currentUrl}
             closeMenu={this.closeMenu}
-         >
-            Start
-         </LinkComponent>
+         />
          <LinkComponent
             url={PROFILE}
             name={'Profile'}
             currentUrl={currentUrl}
             closeMenu={this.closeMenu}
-         >
-            Start
-         </LinkComponent>
-         <LinkComponent
-            url={USER_CONTACT}
-            name={'Contact'}
-            currentUrl={currentUrl}
-            closeMenu={this.closeMenu}
-         >
-            Start
-         </LinkComponent>
+         />
       </div>
    );
 
    render() {
       const currentUrl = history.location.pathname;
-      //todo: fix this flag:
       const {menuOpen} = this.props;
       const menuClasses = classNames({
          'menu': true,

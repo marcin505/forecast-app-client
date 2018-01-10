@@ -1,10 +1,7 @@
 import {fromJS} from 'immutable';
 import {monthsArray} from 'components/common/utils/functionUtils.js';
 import {
-   SET_NOMINATED_PERSON_ID,
-   SET_NOMINATION_ADDED,
-   ADD_NOMINATION,
-   RAISE_VOTES,
+
 } from 'redux/actions/actionTypes';
 
 export const initialState = fromJS({
@@ -240,45 +237,6 @@ export const initialState = fromJS({
 
 export default function weatherReducer(state = initialState, {type, payload}) {
    switch (type) {
-      case SET_NOMINATED_PERSON_ID:
-         return state
-            .set('nominatedPersonId', payload.personId);
-      case SET_NOMINATION_ADDED:
-         return state
-            .set('nominationAdded', payload.nominationAdded);
-      case ADD_NOMINATION:{
-        const weather = state.get('weather').map(record=> {
-           if (payload.personId === record.get('id')) {
-              record = record.update('nominations', arr => arr.push(fromJS({
-                 id: 663,
-                 nomination: payload.nomination,
-              })));
-           }
-           return record;
-        });
-        return state.set('weather', weather);
-      }
-      case RAISE_VOTES: {
-         // console.log(payload);
-         const weather = state
-            .get('weather')
-            .map(record=> {
-                  if (payload.personId === record.get('id')) {
-                     const nominations = record
-                        .get('nominations')
-                        .map(nomRecord => {
-                           return (payload.nominationId === nomRecord.get('id')) ?
-                              nomRecord.set('votes', payload.votesCount) :
-                              nomRecord;
-                        });
-                     return record.set('nominations', nominations);
-                  } else {
-                     return record;
-                  }
-               }
-            );
-         return state.set('weather', weather);
-      }
       default:{
          return state;
       }

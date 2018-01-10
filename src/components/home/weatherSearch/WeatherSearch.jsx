@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux';
 import { fromJS } from 'immutable';
 import PropTypes from 'prop-types';
 import { Link as ScrollLink } from 'react-scroll';
-import { setNominatedPersonId } from 'redux/actions/weatherActions.js';
 import SearchInput from 'components/common/searchInput/SearchInput.jsx'
 import WeatherSearchResults from 'components/home/weatherSearch/weatherSearchResults/WeatherSearchResults.jsx'
 import Browse from 'components/home/weatherSearch/browse/Browse.jsx';
@@ -89,7 +88,6 @@ export class WeatherSearch extends Component {
   renderBrowseAll = () => (
     <Browse
       weather={this.props.weather}
-      setNominatedPersonId={this.setNominatedPersonId}
       closeAction={this.props.setExpandedSections}
       ScrollLink={ScrollLink}
     />
@@ -143,7 +141,6 @@ export class WeatherSearch extends Component {
           <div className="">
             <WeatherSearchResults
               weather={this.state.foundRecords}
-              setNominatedPersonId={this.setNominatedPersonId}
             />
             {isBrowseAll && this.renderBrowseAll()}
           </div>
@@ -154,12 +151,7 @@ export class WeatherSearch extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  setNominatedPersonId: bindActionCreators(
-    setNominatedPersonId,
-    dispatch,
-  )
-});
 
-export default connect(null, mapDispatchToProps)(WeatherSearch);
+
+export default WeatherSearch;
 

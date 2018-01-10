@@ -3,7 +3,6 @@ import {
   LOGGIN_FAILED,
   LOGGIN_SUCCESS,
   LOGOUT,
-  LOGOUT_SUCCESS
 } from 'redux/actions/actionTypes';
 
 export const login = ({ email, password }) => {
@@ -33,6 +32,3 @@ export const logout = () => ({
   type: LOGOUT,
 });
 
-export const logoutSuccess = () => ({
-  type: LOGOUT_SUCCESS,
-});
