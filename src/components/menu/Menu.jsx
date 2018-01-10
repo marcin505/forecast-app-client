@@ -75,8 +75,8 @@ class Menu extends Component {
                <img className="user-img" src={han} alt="han"/>
                <div className="menu__credentials-container">
                   <div className="logged-as">You are logged as:</div>
-                  <div className="credentials">Han z Solo</div>
-                  <div className="logout-link">Logout</div>
+                  {/* <div className="credentials">Han z Solo</div>
+                  <div className="logout-link">Logout</div> */}
                </div>
             </div>
             {this.renderUserLinks(currentUrl)}

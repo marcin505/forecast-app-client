@@ -1,7 +1,7 @@
 import { fromJS } from 'immutable';
 import {
-  LOGGING_BY_EMAIL_SUCCESS,
-  LOGGING_BY_EMAIL_FAILED
+  LOGGIN_SUCCESS,
+  LOGGIN_FAILED
 } from 'redux/actions/actionTypes';
 
 export const initialState = fromJS({
@@ -15,12 +15,12 @@ export const initialState = fromJS({
 
 export default function authReducer(state = initialState, { type, payload }) {
   switch (type) {
-    case LOGGING_BY_EMAIL_SUCCESS:
+    case LOGGIN_SUCCESS:
       return state
         .set('logged', true)
         .set('invalidEmail', false)
         .set('email', payload.email);
-    case LOGGING_BY_EMAIL_FAILED:
+    case LOGGIN_FAILED:
       return state
         .set('logged', false)
         .set('invalidEmail', false)

@@ -9,7 +9,7 @@ import {
 import PropTypes from 'prop-types';
 import {Element, scroller} from 'react-scroll';
 import TransitionGroup from 'react-addons-transition-group';
-import {defaultScrollProperties} from 'components/common/utils/functionUtils.js';
+// import {defaultScrollProperties} from 'components/common/utils/functionUtils.js';
 import WeatherSearch from 'components/home/weatherSearch/WeatherSearch.jsx';
 import Modal from 'components/common/modal/Modal.jsx';
 import './Home.css';

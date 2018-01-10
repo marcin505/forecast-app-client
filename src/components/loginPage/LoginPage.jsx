@@ -3,7 +3,7 @@ import './LoginPage.css';
 import TextInput from 'components/common/textInput/TextInput.jsx'
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {loginByEmail} from 'redux/actions/authActions.js';
+import {login} from 'redux/actions/authActions.js';
 import {isUserLogged} from 'redux/selectors/authSelectors.js';
 import PropTypes from 'prop-types';
 
@@ -59,7 +59,7 @@ class LoginPage extends Component {
    onSubmit = (e) => {
       e.preventDefault();
       if (this.isFormValid()) {
-         this.props.loginByEmail({email: this.state.email});
+         this.props.login({email: this.state.email});
       }
    };
 
@@ -117,7 +117,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-   loginByEmail: bindActionCreators(loginByEmail, dispatch),
+   login: bindActionCreators(login, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
