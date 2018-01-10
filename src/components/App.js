@@ -1,14 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { getAuth } from 'redux/selectors/authSelectors.js';
-import { fromJS } from 'immutable';
 import PropTypes from 'prop-types';
 import { history } from 'routes/History.jsx';
 import { Provider } from 'react-redux';
 import { Router, Switch, Route } from 'react-router-dom';
-import createSagaMiddleware from 'redux-saga';
-import {toJS} from 'immutable';
-import rootSaga from 'redux/sagas/rootSaga';
 import DocumentTitle from 'react-document-title';
 import Header from 'components/header/Header.jsx'
 import Footer from 'components/footer/Footer.jsx'
@@ -33,7 +29,6 @@ const errorSite = () => (
 
 const App = ({store, loggedUser}) => {
   const isLogged = loggedUser.get('isLogged');
-  console.log(36, isLogged);
   return (
     <DocumentTitle title="Weather App">
       <Provider store={store}>

@@ -3,7 +3,6 @@ import {
   LOGGIN_SUCCESS,
   LOGGIN_FAILED,
   LOGOUT,
-  LOGOUT_SUCCESS,
 } from 'redux/actions/actionTypes';
 
 const getToken = () => (localStorage.getItem('token') || '');
@@ -30,7 +29,7 @@ export default function authReducer(state = initialState, { type,  payload }) {
         .set('accessDenied', true)
         .set('email', '')
         .set('token', getToken())
-    case LOGOUT_SUCCESS: 
+    case LOGOUT:
       return initialState;         
     default:
     {

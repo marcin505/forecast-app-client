@@ -9,7 +9,6 @@ import {
    USER_CONTACT,
 } from 'routes/routesDefinitions.js';
 import LinkComponent from 'components/menu/linkComponent/LinkComponent.jsx'
-import han from 'assets/images/people/han_solo.png';
 import './Menu.css';
 
 class Menu extends Component {
@@ -76,11 +75,10 @@ class Menu extends Component {
                <span className="close-button" onClick={() => this.closeMenu()}/>
             </div>
             <div className="menu__login-container">
-               <img className="user-img" src={han} alt="han"/>
                <div className="menu__credentials-container">
                   <div className="logged-as">You are logged as:</div>
-                   <div className="credentials">{email}</div>
-                    <div className="logout-link" onClick={logout}>logout</div> 
+                  <div className="credentials">{email}</div>
+                  <div className="logout-link" onClick={logout}>logout</div>
                </div>
             </div>
             {this.renderUserLinks(currentUrl)}

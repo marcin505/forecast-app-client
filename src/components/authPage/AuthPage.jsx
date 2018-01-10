@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import './AuthPage.css';
-import {toJS} from 'immutable';
 import TextInput from 'components/common/textInput/TextInput.jsx'
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -78,8 +77,6 @@ class AuthPage extends Component {
 
    render() {
       const {email, password, errors, emailPlaceholder, passwordPlaceholder} = this.state;
-      const {login} = this.props;
-      console.log(this.props);
       return (
          <div className="login-page">
             <p className="community-logo">

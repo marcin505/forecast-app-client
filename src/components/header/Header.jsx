@@ -6,8 +6,6 @@ import {getAuth} from 'redux/selectors/authSelectors.js';
 import {logout} from 'redux/actions/authActions.js';
 import './Header.css';
 import Menu from 'components/menu/Menu.jsx';
-import {history} from 'routes/History.jsx';
-import  { LOGIN } from 'routes/routesDefinitions.js';
 import {
    USER_HOME
 } from 'routes/routesDefinitions.js';
