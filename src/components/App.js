@@ -30,21 +30,17 @@ const errorSite = () => (
     404
       </div>
 );
-const initialState = fromJS({
-  isLogged: false,
-  accessDenied: false,
-  email: '',
-  token: '',
-});
 
-const App = ({store, isLogged}) => {
+const App = ({store, loggedUser}) => {
+  const isLogged = loggedUser.get('isLogged');
+  console.log(36, isLogged);
   return (
     <DocumentTitle title="Weather App">
       <Provider store={store}>
         <Router history={history}>
           <div>
             <div className="page">
-              <Header />
+              {isLogged && <Header loggedUser = {loggedUser} />}
               <Switch>
                 <PrivateRoute
                   auth={() => isLogged}
@@ -78,7 +74,7 @@ const App = ({store, isLogged}) => {
 
 const mapStateToProps = state => {
   return ({
-     isLogged: getAuth(state).get('isLogged'),
+    loggedUser: getAuth(state),
   });
 };
 export default connect(mapStateToProps)(App);

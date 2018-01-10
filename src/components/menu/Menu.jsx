@@ -80,7 +80,7 @@ class Menu extends Component {
                <div className="menu__credentials-container">
                   <div className="logged-as">You are logged as:</div>
                    <div className="credentials">{email}</div>
-                   <div className="logout-link" onClick={logout}>Logout</div>
+                    <div className="logout-link" onClick={logout}>logout</div> 
                </div>
             </div>
             {this.renderUserLinks(currentUrl)}
