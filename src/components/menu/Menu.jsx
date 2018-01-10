@@ -6,7 +6,6 @@ import {history} from 'routes/History';
 import {
    USER_HOME,
    PROFILE,
-   USER_CONTACT,
 } from 'routes/routesDefinitions.js';
 import LinkComponent from 'components/menu/linkComponent/LinkComponent.jsx'
 import './Menu.css';

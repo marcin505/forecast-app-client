@@ -3,6 +3,9 @@ import {
   LOGGIN_FAILED,
   LOGGIN_SUCCESS,
   LOGOUT,
+  PROFILE,
+  PROFILE_SUCCESS,
+  PROFILE_FAILED,
 } from 'redux/actions/actionTypes';
 
 export const login = ({ email, password }) => {
@@ -31,4 +34,21 @@ export const loginFailed = () => ({
 export const logout = () => ({
   type: LOGOUT,
 });
+
+export const profile = () => ({
+  type: PROFILE,
+})
+
+export const profileSuccess = ({email, _id}) => ({
+   type: PROFILE_SUCCESS,
+   payload: {
+      email,
+      _id,
+   }
+})
+
+export const profileFailed = () => ({
+   type: PROFILE_FAILED,
+})
+
 

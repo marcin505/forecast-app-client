@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { fromJS } from 'immutable';
 import PropTypes from 'prop-types';
 import { Link as ScrollLink } from 'react-scroll';
@@ -25,7 +23,7 @@ export class WeatherSearch extends Component {
     this.state = {
       searchString : '',
       expanded: false,
-      placeHolder: 'Add your nominee',
+      placeHolder: 'Search the weather',
       foundRecords: fromJS([]),
       isBrowseAll: false,
     }
@@ -71,18 +69,18 @@ export class WeatherSearch extends Component {
   };
 
   onBlur = () => {
-    this.setState({ placeHolder: 'Add your Nominee' });
+    this.setState({ placeHolder: 'Search your weather' });
   };
 
   closeSearchMode = () => {
-    this.setState({ searchString: '',  placeHolder: 'Add your Nominee' });
+    this.setState({ searchString: '',  placeHolder: 'Search your weather' });
     this.props.setExpandedSections('weatherSearch', false);
     this.setState({ foundRecords:fromJS([])});
   };
 
   openBrowseAll = () => {
     this.props.setExpandedSections('weatherSearch', true);
-    this.setState({ isBrowseAll: true,  searchString: '', placeHolder: 'Add your Nominee', foundRecords:fromJS([]) });
+    this.setState({ isBrowseAll: true,  searchString: '', placeHolder: 'Bang Bang', foundRecords:fromJS([]) });
   };
 
   renderBrowseAll = () => (
@@ -112,7 +110,7 @@ export class WeatherSearch extends Component {
             heading={'Start typing to search for a nominee'}
             /> :
             <p className="heading-red-sm">
-                Add your nomination
+                Search your weather
             </p>
           }
           <SearchInput

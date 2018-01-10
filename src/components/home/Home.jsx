@@ -5,6 +5,8 @@ import {
    getWeather,
 } from 'redux/selectors/weatherSelectors.js';
 // import {} from 'redux/actions/weatherActions.js';
+import {profile} from 'redux/actions/authActions.js';
+import {bindActionCreators} from 'redux';
 import PropTypes from 'prop-types';
 import {Element, scroller} from 'react-scroll';
 import TransitionGroup from 'react-addons-transition-group';
@@ -18,6 +20,10 @@ class Home extends Component {
    static propTypes = {
       weather: PropTypes.object.isRequired,
    };
+
+   componentWillMount () {
+      this.props.profile();
+   }
 
    constructor() {
       super();
@@ -86,15 +92,13 @@ class Home extends Component {
    }
 }
 
-// const mapDispatchToProps = dispatch => ({
-//    setNominatedPersonId: bindActionCreators(
-//       setNominatedPersonId,
-//       dispatch,
-//    ),
-// });
+
+const mapDispatchToProps = dispatch => ({
+   profile: bindActionCreators(profile, dispatch),
+});
 
 const mapStateToProps = state => ({
    weather: getWeather(state),
 });
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

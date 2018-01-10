@@ -1,10 +1,10 @@
 //import { history } from 'components/router/History';
 import { takeLatest, call, put } from 'redux-saga/effects';
-import { LOGGIN, LOGOUT } from 'redux/actions/actionTypes';
+import { LOGGIN, LOGOUT, PROFILE } from 'redux/actions/actionTypes';
 import * as AuthActions from 'redux/actions/authActions';
-import { loginRequest, logoutRequest } from 'api/authAPI.js';
+import { loginRequest, logoutRequest, profileRequest } from 'api/authAPI.js';
 
-export function* loginSaga({ payload: { email, password } }) {
+function* loginSaga({ payload: { email, password } }) {
     try {
     const user = yield call(loginRequest, email, password); 
     yield put(AuthActions.loginSuccess({
@@ -17,13 +17,27 @@ export function* loginSaga({ payload: { email, password } }) {
   }
 }
 
-export function* logoutSaga() {
+function* logoutSaga() {
   yield call(logoutRequest);
+}
+
+function* profileSaga() {
+   try {
+      const token = localStorage.getItem('token');
+      const user = yield call(profileRequest, token);
+      yield put(AuthActions.profileSuccess({
+         email: user.email,
+         _id: user._id,
+      }));
+   } catch (error) {
+      yield put(AuthActions.profileFailed());
+   }
 }
 
 export default function* watch() {
   yield* [
     takeLatest(LOGGIN, loginSaga),
-    takeLatest(LOGOUT, logoutSaga)
+    takeLatest(LOGOUT, logoutSaga),
+    takeLatest(PROFILE, profileSaga),
   ];
 }

@@ -5,7 +5,7 @@ import './Profile.css';
 class Profile extends Component {
 
    static propTypes = {
-      loggedUser: PropTypes.object,
+      loggedUser: PropTypes.object.isRequired,
    };
 
    static defaultProps = {
@@ -16,7 +16,6 @@ class Profile extends Component {
       const loggedUser = this.props.loggedUser.toJS();
       const userData = {email : loggedUser.email, id: loggedUser._id }
 
-      console.log(19, loggedUser);
       return (
          <div className="profile">
             <div className="content-wrapper">
