@@ -6,13 +6,15 @@ import {
   LOGOUT_SUCCESS
 } from 'redux/actions/actionTypes';
 
-export const login = ({ email, password }) => ({
+export const login = ({ email, password }) => {
+  // console.log(10, email, password);
+  return({
   type: LOGGIN,
   payload: {
     email,
     password
   },
-});
+})};
 
 export const loginSuccess = ({ email, token }) => ({
   type: LOGGIN_SUCCESS,

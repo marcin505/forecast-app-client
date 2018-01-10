@@ -79,6 +79,7 @@ class AuthPage extends Component {
    render() {
       const {email, password, errors, emailPlaceholder, passwordPlaceholder} = this.state;
       const {login} = this.props;
+      console.log(this.props);
       return (
          <div className="login-page">
             <p className="community-logo">
