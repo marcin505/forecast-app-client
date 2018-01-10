@@ -2,14 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getAuth } from 'redux/selectors/authSelectors.js';
 import PropTypes from 'prop-types';
-import { history } from 'routes/History.jsx';
+import { history } from 'routes/History';
 import { Provider } from 'react-redux';
 import { Router, Switch, Route } from 'react-router-dom';
 import DocumentTitle from 'react-document-title';
 import Header from 'components/header/Header.jsx'
 import Footer from 'components/footer/Footer.jsx'
 import Home from 'components/home/Home.jsx'
-import History from 'components/history/History.jsx'
+import History from 'components/profile/Profile.jsx'
 import 'assets/stylesheets/Styles.css';
 import 'assets/stylesheets/Responsive.css';
 import {
@@ -20,11 +20,10 @@ import {
 import AuthPage from 'components/authPage/AuthPage.jsx'
 import PrivateRoute from 'routes/PrivateRoute.js';
 
-
 const errorSite = () => (
-  <div className="errorSite">
-    404
-      </div>
+   <div className="errorSite">
+     404
+   </div>
 );
 
 const App = ({store, loggedUser}) => {

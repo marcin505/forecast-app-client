@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import classNames from 'classnames';
 import onClickOutside from 'react-onclickoutside'
 import PropTypes from 'prop-types';
-import {history} from 'routes/History.jsx';
+import {history} from 'routes/History';
 import {
    USER_HOME,
    USER_HISTORY,
@@ -42,7 +42,7 @@ class Menu extends Component {
          </LinkComponent>
          <LinkComponent
             url={USER_HISTORY}
-            name={'History'}
+            name={'Profile'}
             currentUrl={currentUrl}
             closeMenu={this.closeMenu}
          >

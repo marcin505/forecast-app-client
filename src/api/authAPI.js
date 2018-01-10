@@ -1,5 +1,5 @@
 import * as axios from 'axios';
-import { URL } from 'api/constants';
+import { URL } from '../routes/routesDefinitions';
 
 export const loginRequest = (email, password) => (axios
     .post(`${URL}/login`, {email, password}, { withCredentials: true })
