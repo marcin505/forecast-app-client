@@ -6,18 +6,21 @@ import {history} from 'routes/History';
 import {Provider} from 'react-redux';
 import {Router, Switch, Route} from 'react-router-dom';
 import {profile} from 'redux/actions/authActions.js';
+import {citySearch} from 'redux/actions/locationsActions.js';
 import DocumentTitle from 'react-document-title';
 import Header from 'components/header/Header.jsx'
 import Footer from 'components/footer/Footer.jsx'
 import Home from 'components/home/Home.jsx'
 import Profile from 'components/profile/Profile';
+import Locations from 'components/locations/Locations';
 import {getProfile} from 'components/common/utils/functionUtils';
 import 'assets/stylesheets/Styles.css';
 import 'assets/stylesheets/Responsive.css';
 import {
    MAIN,
    LOGIN,
-   PROFILE,   
+   PROFILE,
+   LOCATIONS,
 } from 'routes/routesDefinitions.js';
 import AuthPage from 'components/authPage/AuthPage.jsx'
 import PrivateRoute from 'routes/PrivateRoute.js';
@@ -56,6 +59,13 @@ class App extends Component {
                               loggedUser={loggedUser}
                            />
                            <PrivateRoute
+                              auth={() => isLogged}
+                              path={LOCATIONS}
+                              redirect={LOGIN}
+                              component={Locations}
+                              citySearch={citySearch}
+                           />
+                           <PrivateRoute
                               auth={() => !isLogged}
                               path={LOGIN}
                               redirect={MAIN}
@@ -67,6 +77,7 @@ class App extends Component {
                               redirect={LOGIN}
                               component={Home}
                            />
+
                            <Route path='.*' exact={true} component={errorSite}/>
                         </Switch>
                      </div>
@@ -84,6 +95,7 @@ class App extends Component {
 
 const mapDispatchToProps = dispatch => ({
    profile: bindActionCreators(profile, dispatch),
+   citySearch: bindActionCreators(profile, dispatch),
 });
 
 const mapStateToProps = state => {

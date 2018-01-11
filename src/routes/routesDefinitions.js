@@ -5,6 +5,7 @@ export const LOGIN = '/login';
 
 /* USER ROUTES */
 export const PROFILE = '/profile';
+export const LOCATIONS = '/locations';
 
 /* WEATHER ROUTES */
 export const weatherURL = 'http://dataservice.accuweather.com';

@@ -8,10 +8,11 @@ import {
 
 export const initialState = fromJS({
     loading: false,
+    failed: false,
     cities: fromJS([]),
 });
 
-export default function weatherReducer(state = initialState, { type, payload }) {
+export default function locationsReducer(state = initialState, { type, payload }) {
     switch (type) {
         case CITY_SEARCH:
         return state
@@ -19,7 +20,9 @@ export default function weatherReducer(state = initialState, { type, payload }) 
         case CITY_SEARCH_SUCCESS:
             return state
             .set('cities', payload.cities);
-        case CITY_SEARCH_FAILED:
+       case CITY_SEARCH_FAILED:
+           return state
+            .set('failed', true);
         default: {
             return state;
         }

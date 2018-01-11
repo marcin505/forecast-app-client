@@ -1,6 +1,6 @@
 @import 'assets/stylesheets/variables.scss';
 
-.profile {
+.locations {
   color: #fff;
   padding: $page-top-padding 0 100px;
 
@@ -8,15 +8,6 @@
     color: $brand-blue;
     cursor: default;
     margin-bottom: 20px;
-  }
-
-  .profile__record {
-    display: flex;
-    justify-content: flex-start;
-
-    .profile__record-key {
-      width:70px;
-    }
   }
 
 }

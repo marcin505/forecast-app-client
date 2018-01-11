@@ -6,6 +6,7 @@ import locations from 'redux/reducers/locationsReducer';
 const rootReducer = combineReducers({
   auth,
   weather,
+  locations,
 });
 
 export default rootReducer;

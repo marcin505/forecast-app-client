@@ -4,7 +4,7 @@ import { LOGGIN, LOGOUT, PROFILE } from 'redux/actions/actionTypes';
 import * as AuthActions from 'redux/actions/authActions';
 import { loginRequest, logoutRequest, profileRequest } from 'api/authAPI.js';
 
-function* loginSaga({ payload: { email, password } }) {
+export const loginSaga = function* loginSaga({ payload: { email, password } }) {
     try {
     const user = yield call(loginRequest, email, password); 
     yield put(AuthActions.loginSuccess({
@@ -17,12 +17,12 @@ function* loginSaga({ payload: { email, password } }) {
   }
 }
 
-function* logoutSaga() {
+export const logoutSaga =  function* logoutSaga() {
   yield call(logoutRequest);
   localStorage.setItem('token', '');
 }
 
-function* profileSaga() {
+export const profileSaga = function* profileSaga() {
    try {
       const token = localStorage.getItem('token');
       const user = yield call(profileRequest, token);
