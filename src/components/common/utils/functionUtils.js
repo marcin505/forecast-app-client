@@ -33,10 +33,12 @@ export const defaultScrollProperties = {
 
 export const getProfile = (getProfileCallback) => {
   const token = localStorage.getItem('token');
-  if (token) {
-      getProfileCallback()
-  } else {
-      return;
-  }
+  // if (token) {
+  //     getProfileCallback()
+  // } else {
+  //     return;
+  // }
+  getProfileCallback()    
+  
 };
 

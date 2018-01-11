@@ -22,6 +22,7 @@ import {
 } from 'routes/routesDefinitions.js';
 import AuthPage from 'components/authPage/AuthPage.jsx'
 import PrivateRoute from 'routes/PrivateRoute.js';
+import { setTimeout } from 'timers';
 
 const errorSite = () => (
    <div className="errorSite">
@@ -32,26 +33,24 @@ const errorSite = () => (
 class App extends Component {
 
    componentWillMount () {
-        getProfile(this.props.profile)
+      getProfile(this.props.profile);
    }
-
+       
    render() {
       const {store, loggedUser} = this.props;
       const isLogged = loggedUser.get('isLogged');
+      const loading = loggedUser.get('loading');
+      console.log('loading:', loading);
       return (
          <DocumentTitle title="Weather App">
             <Provider store={store}>
                <Router history={history}>
-                  <div>
+               {loading ? <div/>:
+                 <div>
+                    <div>
                      <div className="page">
                         {isLogged && <Header loggedUser={loggedUser}/>}
                         <Switch>
-                           <PrivateRoute
-                              auth={() => isLogged}
-                              path={USER_HOME}
-                              redirect={LOGIN}
-                              component={Home}
-                           />
                            <PrivateRoute
                               auth={() => isLogged}
                               path={PROFILE}
@@ -62,7 +61,7 @@ class App extends Component {
                            <PrivateRoute
                               auth={() => !isLogged}
                               path={LOGIN}
-                              redirect={USER_HOME}
+                              redirect={MAIN}
                               component={AuthPage}
                            />
                             <PrivateRoute
@@ -71,15 +70,17 @@ class App extends Component {
                               redirect={LOGIN}
                               component={Home}
                            />
-                           <Route path='*' exact={true} component={errorSite}/>
-
+                           <Route path='.*' exact={true} component={errorSite}/>
                         </Switch>
                      </div>
                      <Footer className="content-wrapper"/>
                   </div>
+                     </div>
+               }
                </Router>
             </Provider>
          </DocumentTitle>
+         
       )
    }
 }

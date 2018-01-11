@@ -85,7 +85,7 @@ class AuthPage extends Component {
             <form onSubmit={this.submitForm}>
                <TextInput
                   type={'text'}
-                  inputName={emailPlaceholder}
+                  inputName={'email'}
                   value={email}
                   disabled={false}
                   onChange={this.onChange}
