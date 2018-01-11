@@ -4,7 +4,7 @@ import onClickOutside from 'react-onclickoutside'
 import PropTypes from 'prop-types';
 import {history} from 'routes/History';
 import {
-   USER_HOME,
+   MAIN,
    PROFILE,
 } from 'routes/routesDefinitions.js';
 import LinkComponent from 'components/menu/linkComponent/LinkComponent.jsx'
@@ -32,7 +32,7 @@ class Menu extends Component {
    renderUserLinks = (currentUrl) => (
       <div className="menu__links">
          <LinkComponent
-            url={USER_HOME}
+            url={MAIN}
             name={'Home'}
             currentUrl={currentUrl}
             closeMenu={this.closeMenu}

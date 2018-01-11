@@ -7,7 +7,7 @@ import {logout} from 'redux/actions/authActions.js';
 import './Header.css';
 import Menu from 'components/menu/Menu.jsx';
 import {
-   USER_HOME
+   MAIN,
 } from 'routes/routesDefinitions.js';
 
 class Header extends Component {
@@ -30,7 +30,7 @@ class Header extends Component {
       <div className="header-container">
       <div className="header content-wrapper">
         <div className="header__logotypes">
-          <Link className="members__logo" to={USER_HOME}>
+          <Link className="members__logo" to={MAIN}>
             Weather App
           </Link>
         </div>

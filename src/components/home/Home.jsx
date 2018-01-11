@@ -5,7 +5,7 @@ import {
    getWeather,
 } from 'redux/selectors/weatherSelectors.js';
 // import {} from 'redux/actions/weatherActions.js';
-import {bindActionCreators} from 'redux';
+// import {bindActionCreators} from 'redux';
 import PropTypes from 'prop-types';
 import {Element, scroller} from 'react-scroll';
 import TransitionGroup from 'react-addons-transition-group';

@@ -9,14 +9,11 @@ import {
 
 } from 'redux/actions/actionTypes';
 
-const getToken = () => (localStorage.getItem('token') || '');
-
 export const initialState = fromJS({
   isLogged: false,
   accessDenied: false,
   email: '',
   _id: null,
-  token: '',
   loading: true,
 });
 
@@ -28,9 +25,9 @@ export default function authReducer(state = initialState, { type, payload }) {
         .set('isLogged', true)
         .set('accessDenied', false)
         .set('email', payload.email)
-        .set('token', payload.token)
         .set('_id', payload._id);
-    case LOGGIN_FAILED, PROFILE_FAILED:
+    case LOGGIN_FAILED:
+    case PROFILE_FAILED:
       return state
         .set('isLogged', false)
         .set('accessDenied', true)

@@ -17,12 +17,10 @@ import 'assets/stylesheets/Responsive.css';
 import {
    MAIN,
    LOGIN,
-   USER_HOME,
    PROFILE,   
 } from 'routes/routesDefinitions.js';
 import AuthPage from 'components/authPage/AuthPage.jsx'
 import PrivateRoute from 'routes/PrivateRoute.js';
-import { setTimeout } from 'timers';
 
 const errorSite = () => (
    <div className="errorSite">
@@ -33,14 +31,13 @@ const errorSite = () => (
 class App extends Component {
 
    componentWillMount () {
-      getProfile(this.props.profile);
+        getProfile(this.props.profile);
    }
        
    render() {
       const {store, loggedUser} = this.props;
       const isLogged = loggedUser.get('isLogged');
       const loading = loggedUser.get('loading');
-      console.log('loading:', loading);
       return (
          <DocumentTitle title="Weather App">
             <Provider store={store}>
