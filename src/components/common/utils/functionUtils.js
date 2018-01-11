@@ -30,3 +30,13 @@ export const defaultScrollProperties = {
   smooth: true,
   offset: -50,
 };
+
+export const getProfile = (getProfileCallback) => {
+  const token = localStorage.getItem('token');
+  if (token) {
+      getProfileCallback()
+  } else {
+      return;
+  }
+};
+

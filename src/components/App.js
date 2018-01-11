@@ -10,13 +10,15 @@ import DocumentTitle from 'react-document-title';
 import Header from 'components/header/Header.jsx'
 import Footer from 'components/footer/Footer.jsx'
 import Home from 'components/home/Home.jsx'
-import Profile from 'components/profile/Profile'
+import Profile from 'components/profile/Profile';
+import {getProfile} from 'components/common/utils/functionUtils';
 import 'assets/stylesheets/Styles.css';
 import 'assets/stylesheets/Responsive.css';
 import {
+   MAIN,
    LOGIN,
    USER_HOME,
-   PROFILE,
+   PROFILE,   
 } from 'routes/routesDefinitions.js';
 import AuthPage from 'components/authPage/AuthPage.jsx'
 import PrivateRoute from 'routes/PrivateRoute.js';
@@ -27,11 +29,10 @@ const errorSite = () => (
    </div>
 );
 
-
 class App extends Component {
 
    componentWillMount () {
-      // this.props.profile();
+        getProfile(this.props.profile)
    }
 
    render() {
@@ -64,8 +65,14 @@ class App extends Component {
                               redirect={USER_HOME}
                               component={AuthPage}
                            />
-                           {/* <Route path={LOGIN} component={AuthPage} /> */}
+                            <PrivateRoute
+                              auth={() => isLogged}
+                              path={MAIN}
+                              redirect={LOGIN}
+                              component={Home}
+                           />
                            <Route path='*' exact={true} component={errorSite}/>
+
                         </Switch>
                      </div>
                      <Footer className="content-wrapper"/>

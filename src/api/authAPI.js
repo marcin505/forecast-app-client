@@ -13,12 +13,14 @@ export const logoutRequest = () => (axios
 export const profileRequest = (token) => {
 
    var config = {
-      headers: {'x-access-token': token}
+      headers: {'x-access-token': token},
+      withCredentials: true,
    };
-   console.log(config);
+
    return (axios
       .get(`${URL}/profile` , config)
       .then(res => res.data)
    );
+
 };
 // http://codeheaven.io/how-to-use-axios-as-your-http-client/

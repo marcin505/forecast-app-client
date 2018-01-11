@@ -16,7 +16,7 @@ class AuthPage extends Component {
    constructor() {
       super();
       this.state = {
-         email: 'mariola@mariola.pl',
+         email: 'marcin@marcin.pl',
          password: 'kurde',
          errors: {},
          isLoading: false,

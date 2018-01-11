@@ -19,6 +19,7 @@ function* loginSaga({ payload: { email, password } }) {
 
 function* logoutSaga() {
   yield call(logoutRequest);
+  localStorage.setItem('token', '');
 }
 
 function* profileSaga() {
