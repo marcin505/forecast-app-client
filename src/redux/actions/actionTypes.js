@@ -13,6 +13,7 @@ export const PROFILE_FAILED = 'PROFILE_FAILED';
 export const CITY_SEARCH =  'CITY_SEARCH';
 export const CITY_SEARCH_SUCCESS =  'CITY_SEARCH_SUCCESS';
 export const CITY_SEARCH_FAILED =  'CITY_SEARCH_FAILED';
+export const RESET_CITIES = 'RESET_CITIES';
 
 /* menu*/
 export const TOGGLE_MENU = 'TOGGLE_MENU';

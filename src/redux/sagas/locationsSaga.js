@@ -6,13 +6,14 @@ import {
 import * as LocationsActions from 'redux/actions/locationsActions';
 import { citySearchRequest } from 'api/locationsAPI.js';
 
-
 function* citySearchSaga ({payload: {query}}) {
-   console.log('citySearch ', query) 
    try {
-       // console.log(query)
-    const cities = yield call(citySearchRequest, query);
-    yield put(LocationsActions.citySearchSuccess({cities}))
+    if (query.length > 3) {
+       const cities = yield call(citySearchRequest, query);
+       yield put(LocationsActions.citySearchSuccess({cities}))
+    } else {
+       yield put (LocationsActions.resetCities())
+    }
   } catch (error) {
     yield put(LocationsActions.citySearchFailed());
   }

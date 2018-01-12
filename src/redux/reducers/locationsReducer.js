@@ -3,6 +3,7 @@ import {
     CITY_SEARCH,
     CITY_SEARCH_SUCCESS,
     CITY_SEARCH_FAILED,
+    RESET_CITIES,
 } from 'redux/actions/actionTypes';
 
 export const initialState = fromJS({
@@ -18,10 +19,16 @@ export default function locationsReducer(state = initialState, { type, payload }
             .set('loading', true);
         case CITY_SEARCH_SUCCESS:
             return state
-            .set('cities', payload.cities);
+            .set('cities', fromJS(payload.cities))
+            .set('failed', false)
+            .set('loading', false);
        case CITY_SEARCH_FAILED:
            return state
-            .set('failed', true);
+            .set('failed', true)
+            .set('loading', false)
+            .set('cities', [])
+       case RESET_CITIES :
+           return initialState;
         default: {
             return state;
         }

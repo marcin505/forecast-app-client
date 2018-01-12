@@ -9,24 +9,3 @@ export const getWeather = createSelector(
     root => (root.get('weather'))
 );
 
-export const getNominatedPersonId = createSelector(
-  getWeatherRoot,
-    root => (root.get('nominatedPersonId')
-  )
-);
-
-export const getNominationAdded = createSelector(
-  getWeatherRoot,
-    root => (root.get('nominationAdded')
- )
-);
-
-export const getVotingMonth = createSelector(
-  getWeatherRoot,
-    root => (root.get('votingMonth'))
-);
-
-export const getWeatherReducer = createSelector(
-  getWeatherRoot,
-    root => (root)
-);

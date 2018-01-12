@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
 import {fromJS} from 'immutable';
-import {
-   getWeather,
-} from 'redux/selectors/weatherSelectors.js';
+import {bindActionCreators} from 'redux';
+import { getWeather } from 'redux/selectors/weatherSelectors.js';
+import { getLocations } from 'redux/selectors/locationsSelectors.js';
 import PropTypes from 'prop-types';
 import {Element, scroller} from 'react-scroll';
 import TransitionGroup from 'react-addons-transition-group';
@@ -19,6 +19,7 @@ class Home extends Component {
 
    static propTypes = {
       weather: PropTypes.object.isRequired,
+      locations: PropTypes.object.isRequired,
    };
 
    constructor() {
@@ -43,11 +44,11 @@ class Home extends Component {
 
    renderCitySearch = () => (
      <SearchContainer
-        weather={this.props.weather}        
         expanded={this.state.expandedSections.CitySearch}
         setExpandedSections={this.setExpandedSections}      
         defaultPlaceHolder = {'Search the city'}
         searchName = {'CitySearch'}
+        apiCallback = {this.props.citySearch}
      >
      <div>kurde balans</div>
      </SearchContainer>
@@ -69,7 +70,7 @@ class Home extends Component {
       let expandedSections = this.resetExpandedSections();
       expandedSections = {...expandedSections, [section]: value};
       this.setState({expandedSections: expandedSections}, () => {
-        console.log(67, this.state.expandedSections);
+        // console.log(67, this.state.expandedSections);
       });
       if (scrollProperties) {
         scroller.scrollTo(section, scrollProperties);
@@ -92,8 +93,11 @@ class Home extends Component {
      this.setState({expandedSections: this.resetExpandedSections()})
    };
 
+   componentWillReceiveProps(nextProps) {
+      console.log(97, nextProps.locations.toJS())
+   }
+
    render() {
-     
       const { isModal} = this.state;
       return (
          <div className="home" id="home">
@@ -113,6 +117,11 @@ class Home extends Component {
 
 const mapStateToProps = state => ({
    weather: getWeather(state),
+   locations: getLocations(state),
 });
 
-export default connect(mapStateToProps)(Home);
+const mapDispatchToProps = dispatch => ({
+   citySearch: bindActionCreators(citySearch, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

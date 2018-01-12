@@ -12,11 +12,11 @@ import _ from 'lodash';
 export class SearchContainer extends Component {
 
   static propTypes = {
-    weather: PropTypes.object.isRequired,
     expanded: PropTypes.bool,
     setExpandedSections: PropTypes.func.isRequired,
     defaultPlaceHolder: PropTypes.string.isRequired,
     searchName: PropTypes.string.isRequired,
+    apiCallback: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -29,7 +29,7 @@ export class SearchContainer extends Component {
       searchString : '',
       expanded: false,
       placeHolder: '',
-      foundRecords: fromJS([]),
+      // foundRecords: fromJS([]),
     }
   };
   
@@ -37,33 +37,20 @@ export class SearchContainer extends Component {
     this.setState({placeHolder: this.props.defaultPlaceHolder})
   }
 
-  searchWeather = _.debounce(() => {
-    const {weather} = this.props;
-      let foundRecords = weather.filter(record => {
-        const surname =record.get('surname');
-        const name = record.get('name');
-        const user = `${name} ${surname}`.toLowerCase();
-        const searchString = this.state.searchString.toLowerCase();
-        let searchResult = () => {};
-        if(searchString.length > 1) {
-          searchResult = () => (
-            user.indexOf(searchString) !== -1
-          );
-        } else {
-          searchResult = () => (null);
-        }
-        return searchResult();
-      });
-    this.setState({foundRecords});
-  }, 500);
+  searchDebounce = _.debounce(() => {
+    const searchString = this.state.searchString.toLowerCase();
+    this.props.apiCallback({query: searchString});
+    // console.log(searchString);
+  }, 1000);
 
   onChangeInputHandler = (e) => {
     this.setState({ searchString : e.target.value });
-    this.searchWeather();
+    this.searchDebounce();
   };
 
   resetSearchString = () => {
-    this.setState({ searchString: '', placeHolder: '', foundRecords:fromJS([])});
+     // this.setState({ searchString: '', placeHolder: '', foundRecords:fromJS([])});
+     this.setState({ searchString: '', placeHolder: ''});
   };
 
   onFocus = ()  => {
@@ -83,7 +70,7 @@ export class SearchContainer extends Component {
   closeSearchMode = () => {
     this.setState({ searchString: '',  placeHolder: this.props.defaultPlaceHolder });
     this.props.setExpandedSections(this.props.searchName, false);
-    this.setState({ foundRecords:fromJS([])});
+    // this.setState({ foundRecords:fromJS([])});
   };
 
   render() {
@@ -118,11 +105,10 @@ export class SearchContainer extends Component {
         
           {expanded &&
           <div>
-                   {this.props.children}
-             <WeatherSearchResults
+             {this.props.children}
+             {/*<WeatherSearchResults
               weather={this.state.foundRecords}
-            /> 
-     
+              /> */}
           </div>
           }
         </div>
