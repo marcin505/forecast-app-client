@@ -16,6 +16,10 @@ class Locations extends Component {
         locations: {},
    };
 
+   componentDidMount () {
+        // this.props.citySearch({query: 'Orawka'});
+   }
+   
    render() {
       return (
          <div className="locations">

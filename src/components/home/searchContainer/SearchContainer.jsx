@@ -32,7 +32,6 @@ export class SearchContainer extends Component {
       foundRecords: fromJS([]),
     }
   };
-
   
   componentDidMount() {
     this.setState({placeHolder: this.props.defaultPlaceHolder})
@@ -95,7 +94,6 @@ export class SearchContainer extends Component {
       'search-container--dark': expanded,
       'search-container--additional-padding': expanded,
     });
-
     return (
       <div className={weatherSearchClasses}>
         <div className="content-wrapper">
@@ -119,11 +117,12 @@ export class SearchContainer extends Component {
           />
         
           {expanded &&
-          <div className="">
-            <WeatherSearchResults
+          <div>
+                   {this.props.children}
+             <WeatherSearchResults
               weather={this.state.foundRecords}
-            />
-        
+            /> 
+     
           </div>
           }
         </div>
@@ -131,6 +130,5 @@ export class SearchContainer extends Component {
     );
   }
 }
-
 export default SearchContainer;
 

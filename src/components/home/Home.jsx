@@ -11,6 +11,7 @@ import TransitionGroup from 'react-addons-transition-group';
 import WeatherSearch from 'components/home/weatherSearch/WeatherSearch.jsx';
 import SearchContainer from 'components/home/searchContainer/SearchContainer.jsx';
 import Modal from 'components/common/modal/Modal.jsx';
+import CityRecords from'components/home/cityRecords/CityRecords';
 import './Home.css';
 import { citySearch } from '../../redux/actions/locationsActions';
 
@@ -36,7 +37,8 @@ class Home extends Component {
          weather={this.props.weather}
          expanded={this.state.expandedSections.WeatherSearch}
          setExpandedSections={this.setExpandedSections}
-      />
+      >
+      </WeatherSearch>
    );
 
    renderCitySearch = () => (
@@ -46,7 +48,9 @@ class Home extends Component {
         setExpandedSections={this.setExpandedSections}      
         defaultPlaceHolder = {'Search the city'}
         searchName = {'CitySearch'}
-     />
+     >
+     <div>kurde balans</div>
+     </SearchContainer>
    );
 
   resetExpandedSections = () => {
@@ -89,9 +93,13 @@ class Home extends Component {
    };
 
    render() {
+     
       const { isModal} = this.state;
       return (
          <div className="home" id="home">
+            <Element name='WeatherSearch' className="expandable-section">
+              {this.renderWeatherSearch()}
+            </Element>
             <Element name='CitySearch' className="expandable-section">
               {this.renderCitySearch()}
             </Element>
