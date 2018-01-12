@@ -4,9 +4,9 @@ const getLocationsRoot = state => (state.locations);
 
 /* Checks whether user is logged into application */
 
-export const getLocations = createSelector(
+export const getCities = createSelector(
    getLocationsRoot,
-   root => root,
+   root => root.get('cities'),
 );
 
 

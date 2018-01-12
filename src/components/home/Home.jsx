@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {fromJS} from 'immutable';
 import {bindActionCreators} from 'redux';
 import { getWeather } from 'redux/selectors/weatherSelectors.js';
-import { getLocations } from 'redux/selectors/locationsSelectors.js';
+import { getCities } from 'redux/selectors/locationsSelectors.js';
 import PropTypes from 'prop-types';
 import {Element, scroller} from 'react-scroll';
 import TransitionGroup from 'react-addons-transition-group';
@@ -19,7 +19,7 @@ class Home extends Component {
 
    static propTypes = {
       weather: PropTypes.object.isRequired,
-      locations: PropTypes.object.isRequired,
+      cities: PropTypes.object.isRequired,
    };
 
    constructor() {
@@ -94,7 +94,7 @@ class Home extends Component {
    };
 
    componentWillReceiveProps(nextProps) {
-      console.log(97, nextProps.locations.toJS())
+      console.log(97, nextProps.cities.toJS())
    }
 
    render() {
@@ -117,7 +117,7 @@ class Home extends Component {
 
 const mapStateToProps = state => ({
    weather: getWeather(state),
-   locations: getLocations(state),
+   cities: getCities(state),
 });
 
 const mapDispatchToProps = dispatch => ({
