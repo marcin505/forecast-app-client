@@ -1,18 +1,18 @@
 import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
 import {fromJS} from 'immutable';
 import {
    getWeather,
 } from 'redux/selectors/weatherSelectors.js';
-// import {} from 'redux/actions/weatherActions.js';
-// import {bindActionCreators} from 'redux';
 import PropTypes from 'prop-types';
 import {Element, scroller} from 'react-scroll';
 import TransitionGroup from 'react-addons-transition-group';
-// import {defaultScrollProperties} from 'components/common/utils/functionUtils.js';
 import WeatherSearch from 'components/home/weatherSearch/WeatherSearch.jsx';
+import CitySearch from 'components/home/citySearch/CitySearch.jsx';
 import Modal from 'components/common/modal/Modal.jsx';
 import './Home.css';
+import { citySearch } from '../../redux/actions/locationsActions';
 
 class Home extends Component {
 
@@ -26,39 +26,51 @@ class Home extends Component {
          searchString: '',
          modalMessage: '',
          voteAdded: false,
-         expandedSections: this.resetExpandedSections(),
+         expandedSections: {},
          isModal: false,
       };
    };
 
-   resetExpandedSections = () => (fromJS({
-      weatherSearch: false,
-   }));
-
    renderWeatherSearch = () => (
       <WeatherSearch
          weather={this.props.weather}
-         expanded={this.state.expandedSections.toJS().weatherSearch}
+         expanded={this.state.expandedSections.WeatherSearch}
          setExpandedSections={this.setExpandedSections}
       />
    );
 
+   renderCitySearch = () => (
+     <CitySearch
+        weather={this.props.weather}        
+        expanded={this.state.expandedSections.CitySearch}
+        setExpandedSections={this.setExpandedSections}      
+        defaultPlaceHolder = {'Search the city'}
+        searchName = {'CitySearch'}
+     />
+   );
+  resetExpandedSections = () => {
+    const htmlCollection = ReactDOM.findDOMNode(this).children;
+    const expArray = Array.prototype.slice.call(htmlCollection)
+      .filter(element => element.className === 'expandable-section')
+      .map(e => e.attributes[0].nodeValue);
+    const expObject = expArray.reduce((obj, cur) => {
+      obj[cur] = false;
+      return obj;
+    }, {})
+    return expObject;
+   }
+
    setExpandedSections = (section, value, scrollProperties) => {
       let expandedSections = this.resetExpandedSections();
-      expandedSections = expandedSections.set([section], value);
-      this.setState({expandedSections: expandedSections});
-      if (document.getElementById('nominations-list')) {
-         //const listHeight = `${document.getElementById('nominations-list').clientHeight}px`;
-         //console.log(110, listHeight);
-         //document.getElementById('nominations-list').style.height = '0px';
-         setTimeout(() => {
-            scroller.scrollTo(section, scrollProperties)
-         }, 600);
-      } else {
-         scroller.scrollTo(section, scrollProperties);
+      expandedSections = {...expandedSections, [section]: value};
+      this.setState({expandedSections: expandedSections}, () => {
+        console.log(67, this.state.expandedSections);
+      });
+      if (scrollProperties) {
+        scroller.scrollTo(section, scrollProperties);
       }
    };
-
+  
    handleModal = (isOpen, message) => {
       message = message ? message : '';
       this.setState({isModal: isOpen, modalMessage: message});
@@ -71,14 +83,21 @@ class Home extends Component {
       />
    );
 
-   render() {
+   componentDidMount() {
+     this.setState({expandedSections: this.resetExpandedSections()})
+   };
 
+   render() {
       const { isModal} = this.state;
       return (
-         <div className="home">
-            <Element name="weatherSearch">
+         <div className="home" id="home">
+            {/* <Element name="WeatherSearch" className="expandable-section">
               {this.renderWeatherSearch()}
+            </Element> */}
+            <Element name='CitySearch' className="expandable-section">
+              {this.renderCitySearch()}
             </Element>
+
             <TransitionGroup>
                {isModal && this.renderModal(this.state.modalMessage)}
             </TransitionGroup>

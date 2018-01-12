@@ -1,0 +1,52 @@
+@import 'assets/stylesheets/variables.scss';
+@import 'assets/stylesheets/mixins.scss';
+
+.weather-search {
+  padding: $expanding-modules-top-padding 0 0;
+  margin-bottom: $expanding-modules-bottom-margin;
+  &.weather-search--additional-padding {
+    padding-bottom:80vh;
+  }
+  .section-header {
+    margin-bottom: 30px;
+    .close-container .close {
+      @media screen and (max-width: 768px) {
+        top:0;
+      }
+    }
+  }
+
+  .weather-search__top {
+    display: flex;
+    .weather-search__info {
+      @include heading-red-sm();
+      &.expanded {
+        margin-bottom: 100px;
+      }
+    }
+  }
+
+  .browse-all-wrapper {
+    display: flex;
+    direction: rtl;
+  };
+
+  .browse-all-link {
+    font-family: Helvetica-Medium;
+    font-size:17px;
+    cursor: pointer;
+    @include color-transition();
+    &:hover{
+      color: $brand-blue;
+      @include color-transition();
+    }
+  };
+
+  @include background-transition;
+
+  &.weather-search--dark {
+    background: $background-grey;
+    min-height: 300px;
+    @include background-transition;
+  }
+}

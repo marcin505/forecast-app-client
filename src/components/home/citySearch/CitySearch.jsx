@@ -4,32 +4,32 @@ import PropTypes from 'prop-types';
 import { Link as ScrollLink } from 'react-scroll';
 import SearchInput from 'components/common/searchInput/SearchInput.jsx'
 import WeatherSearchResults from 'components/home/weatherSearch/weatherSearchResults/WeatherSearchResults.jsx'
-import Browse from 'components/home/weatherSearch/browse/Browse.jsx';
 import SectionHeader from 'components/common/sectionHeader/SectionHeader.jsx';
 import classNames from 'classnames';
-import './WeatherSearch.css';
+import './CitySearch.css';
 import _ from 'lodash';
 
-export class WeatherSearch extends Component {
+export class CitySearch extends Component {
 
   static propTypes = {
     weather: PropTypes.object.isRequired,
     expanded: PropTypes.bool,
     setExpandedSections: PropTypes.func.isRequired,
+    defaultPlaceHolder: PropTypes.string.isRequired,
+    searchName: PropTypes.string.isRequired,
   };
 
-  static defaulProps = {
+  static defaultProps = {
     expanded: false,
   }
-
+  
   constructor() {
     super();
     this.state = {
       searchString : '',
       expanded: false,
-      placeHolder: 'Search the weather',
+      placeHolder: 'Search the city',
       foundRecords: fromJS([]),
-      isBrowseAll: false,
     }
   };
 
@@ -68,37 +68,23 @@ export class WeatherSearch extends Component {
       smooth: true,
       offset: -50,
     };
-    this.setState({ placeHolder: '', isBrowseAll: false });
-    this.props.setExpandedSections('WeatherSearch', true, scrollProperties);
+    this.setState({ placeHolder: ''});
+    this.props.setExpandedSections(this.props.searchName, true, scrollProperties);
   };
 
   onBlur = () => {
-    this.setState({ placeHolder: 'Search your weather' });
+    this.setState({ placeHolder: 'Search the city' });
   };
 
   closeSearchMode = () => {
-    this.setState({ searchString: '',  placeHolder: 'Search your weather' });
-    this.props.setExpandedSections('WeatherSearch', false);
+    this.setState({ searchString: '',  placeHolder: this.props.defaultPlaceHolder });
+    this.props.setExpandedSections(this.props.searchName, false);
     this.setState({ foundRecords:fromJS([])});
   };
 
-  openBrowseAll = () => {
-    this.props.setExpandedSections('WeatherSearch', true);
-    this.setState({ isBrowseAll: true,  searchString: '', placeHolder: 'Bang Bang', foundRecords:fromJS([]) });
-  };
-
-  renderBrowseAll = () => (
-    <Browse
-      weather={this.props.weather}
-      closeAction={this.props.setExpandedSections}
-      ScrollLink={ScrollLink}
-    />
-  );
-
   render() {
     const { expanded } = this.props;
-    const { placeHolder, isBrowseAll } = this.state;
-
+    const { placeHolder } = this.state;
     const weatherSearchClasses = classNames({
       'weather-search': true,
       'weather-search--dark': expanded,
@@ -111,10 +97,10 @@ export class WeatherSearch extends Component {
           {expanded ?
           <SectionHeader
             closeAction={this.closeSearchMode}
-            heading={'Search your weather'}
+            heading={this.props.defaultPlaceHolder}
             /> :
             <p className="heading-red-sm">
-                Search your weather
+                {this.props.defaultPlaceHolder}
             </p>
           }
           <SearchInput
@@ -126,25 +112,13 @@ export class WeatherSearch extends Component {
               searchMode={expanded}
               placeHolder={placeHolder}
           />
-          <div className="browse-all-wrapper" id="browse">
-            <ScrollLink
-              className="browse-all-link"
-              onClick={() =>this.openBrowseAll()}
-              to={"browse"}
-              spy={true}
-              smooth={true}
-              duration={800}
-              offset={20}
-            >
-              Browse all
-            </ScrollLink>
-          </div>
+        
           {expanded &&
           <div className="">
             <WeatherSearchResults
               weather={this.state.foundRecords}
             />
-            {isBrowseAll && this.renderBrowseAll()}
+        
           </div>
           }
         </div>
@@ -153,5 +127,5 @@ export class WeatherSearch extends Component {
   }
 }
 
-export default WeatherSearch;
+export default CitySearch;
 
