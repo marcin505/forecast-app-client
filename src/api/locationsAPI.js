@@ -3,7 +3,7 @@ import { weatherURL, citySearch } from '../routes/routesDefinitions';
 const apikey = 'iJ2s6KXFWURBhMLcF59iSGhukAghddZz';
 
 export const citySearchRequest = query => (axios
-    .get(`${weatherURL}${citySearch}?apikey=${apikey}&q=${query}&details=true`)
+    .get(`${weatherURL}${citySearch}?apikey=${apikey}&q=${query}&details=true&language=pl`)
     .then(res => res.data)
 );
 

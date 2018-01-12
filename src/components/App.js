@@ -6,7 +6,6 @@ import {history} from 'routes/History';
 import {Provider} from 'react-redux';
 import {Router, Switch, Route} from 'react-router-dom';
 import {profile} from 'redux/actions/authActions.js';
-import {citySearch} from 'redux/actions/locationsActions.js';
 import DocumentTitle from 'react-document-title';
 import Header from 'components/header/Header.jsx'
 import Footer from 'components/footer/Footer.jsx'
@@ -63,7 +62,6 @@ class App extends Component {
                               path={LOCATIONS}
                               redirect={LOGIN}
                               component={Locations}
-                              citySearch={citySearch}
                            />
                            <PrivateRoute
                               auth={() => !isLogged}
@@ -77,7 +75,6 @@ class App extends Component {
                               redirect={LOGIN}
                               component={Home}
                            />
-
                            <Route path='.*' exact={true} component={errorSite}/>
                         </Switch>
                      </div>
@@ -95,7 +92,6 @@ class App extends Component {
 
 const mapDispatchToProps = dispatch => ({
    profile: bindActionCreators(profile, dispatch),
-   citySearch: bindActionCreators(profile, dispatch),
 });
 
 const mapStateToProps = state => {
@@ -103,4 +99,5 @@ const mapStateToProps = state => {
       loggedUser: getAuth(state),
    });
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -1,5 +1,4 @@
 import { fromJS } from 'immutable';
-import { monthsArray } from 'components/common/utils/functionUtils.js';
 import {
     CITY_SEARCH,
     CITY_SEARCH_SUCCESS,

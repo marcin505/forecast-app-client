@@ -21,6 +21,4 @@ export const profileRequest = (token) => {
       .get(`${URL}/profile` , config)
       .then(res => res.data)
    );
-
 };
-// http://codeheaven.io/how-to-use-axios-as-your-http-client/

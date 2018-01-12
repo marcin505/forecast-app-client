@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import PropTypes from 'prop-types';
+import {citySearch} from 'redux/actions/locationsActions.js';
 import './Locations.css';
 
 class Locations extends Component {
@@ -10,12 +13,8 @@ class Locations extends Component {
    };
 
    static defaultProps = {
-
+        locations: {},
    };
-
-   componentDidMount () {
-      this.props.citySearch({query: 'Krak'})
-   }
 
    render() {
       return (
@@ -25,11 +24,13 @@ class Locations extends Component {
                   Locations
                </h1>
                <hr/>
-
             </div>
          </div>
       )
    }
 }
+const mapDispatchToProps = dispatch => ({
+    citySearch: bindActionCreators(citySearch, dispatch)
+ });
 
-export default Locations;
+export default connect(null, mapDispatchToProps)(Locations);

@@ -5,7 +5,7 @@ import {
 } from 'redux/actions/actionTypes';
 
 export const citySearch = ({ query }) => {
-   console.log(8, query);
+   console.log('actions:', query);
    return ({
       type: CITY_SEARCH,
       payload: {
@@ -14,12 +14,14 @@ export const citySearch = ({ query }) => {
    });
 }
   
-export const citySearchSuccess = ({ cities }) => ({
+export const citySearchSuccess = ({cities}) => {
+  return ({
     type: CITY_SEARCH_SUCCESS,
     payload: {
       cities,
     },
-  });
+  })
+};
   
 export const citySearchFailed = () => ({
     type: CITY_SEARCH_FAILED,
