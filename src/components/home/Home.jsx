@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import {Element, scroller} from 'react-scroll';
 import TransitionGroup from 'react-addons-transition-group';
 import WeatherSearch from 'components/home/weatherSearch/WeatherSearch.jsx';
-import CitySearch from 'components/home/citySearch/CitySearch.jsx';
+import SearchContainer from 'components/home/searchContainer/SearchContainer.jsx';
 import Modal from 'components/common/modal/Modal.jsx';
 import './Home.css';
 import { citySearch } from '../../redux/actions/locationsActions';
@@ -40,7 +40,7 @@ class Home extends Component {
    );
 
    renderCitySearch = () => (
-     <CitySearch
+     <SearchContainer
         weather={this.props.weather}        
         expanded={this.state.expandedSections.CitySearch}
         setExpandedSections={this.setExpandedSections}      
@@ -48,6 +48,7 @@ class Home extends Component {
         searchName = {'CitySearch'}
      />
    );
+
   resetExpandedSections = () => {
     const htmlCollection = ReactDOM.findDOMNode(this).children;
     const expArray = Array.prototype.slice.call(htmlCollection)
@@ -91,13 +92,9 @@ class Home extends Component {
       const { isModal} = this.state;
       return (
          <div className="home" id="home">
-            {/* <Element name="WeatherSearch" className="expandable-section">
-              {this.renderWeatherSearch()}
-            </Element> */}
             <Element name='CitySearch' className="expandable-section">
               {this.renderCitySearch()}
             </Element>
-
             <TransitionGroup>
                {isModal && this.renderModal(this.state.modalMessage)}
             </TransitionGroup>

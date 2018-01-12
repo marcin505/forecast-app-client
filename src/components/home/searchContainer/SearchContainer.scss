@@ -1,10 +1,10 @@
 @import 'assets/stylesheets/variables.scss';
 @import 'assets/stylesheets/mixins.scss';
 
-.weather-search {
+.search-container {
   padding: $expanding-modules-top-padding 0 0;
   margin-bottom: $expanding-modules-bottom-margin;
-  &.weather-search--additional-padding {
+  &.search-container--additional-padding {
     padding-bottom:80vh;
   }
   .section-header {
@@ -16,7 +16,7 @@
     }
   }
 
-  .weather-search__top {
+  .search-container__top {
     display: flex;
     .weather-search__info {
       @include heading-red-sm();
@@ -26,25 +26,9 @@
     }
   }
 
-  .browse-all-wrapper {
-    display: flex;
-    direction: rtl;
-  };
-
-  .browse-all-link {
-    font-family: Helvetica-Medium;
-    font-size:17px;
-    cursor: pointer;
-    @include color-transition();
-    &:hover{
-      color: $brand-blue;
-      @include color-transition();
-    }
-  };
-
   @include background-transition;
 
-  &.weather-search--dark {
+  &.search-container--dark {
     background: $background-grey;
     min-height: 300px;
     @include background-transition;

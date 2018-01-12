@@ -18,7 +18,7 @@ export class WeatherSearch extends Component {
     setExpandedSections: PropTypes.func.isRequired,
   };
 
-  static defaulProps = {
+  static defaultProps = {
     expanded: false,
   }
 

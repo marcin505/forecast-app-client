@@ -6,10 +6,10 @@ import SearchInput from 'components/common/searchInput/SearchInput.jsx'
 import WeatherSearchResults from 'components/home/weatherSearch/weatherSearchResults/WeatherSearchResults.jsx'
 import SectionHeader from 'components/common/sectionHeader/SectionHeader.jsx';
 import classNames from 'classnames';
-import './CitySearch.css';
+import './SearchContainer.css';
 import _ from 'lodash';
 
-export class CitySearch extends Component {
+export class SearchContainer extends Component {
 
   static propTypes = {
     weather: PropTypes.object.isRequired,
@@ -28,10 +28,15 @@ export class CitySearch extends Component {
     this.state = {
       searchString : '',
       expanded: false,
-      placeHolder: 'Search the city',
+      placeHolder: '',
       foundRecords: fromJS([]),
     }
   };
+
+  
+  componentDidMount() {
+    this.setState({placeHolder: this.props.defaultPlaceHolder})
+  }
 
   searchWeather = _.debounce(() => {
     const {weather} = this.props;
@@ -73,7 +78,7 @@ export class CitySearch extends Component {
   };
 
   onBlur = () => {
-    this.setState({ placeHolder: 'Search the city' });
+    this.setState({ placeHolder: this.props.defaultPlaceHolder });
   };
 
   closeSearchMode = () => {
@@ -86,13 +91,13 @@ export class CitySearch extends Component {
     const { expanded } = this.props;
     const { placeHolder } = this.state;
     const weatherSearchClasses = classNames({
-      'weather-search': true,
-      'weather-search--dark': expanded,
-      'weather-search--additional-padding': expanded,
+      'search-container': true,
+      'search-container--dark': expanded,
+      'search-container--additional-padding': expanded,
     });
 
     return (
-      <div className={weatherSearchClasses} id="weather-search">
+      <div className={weatherSearchClasses}>
         <div className="content-wrapper">
           {expanded ?
           <SectionHeader
@@ -127,5 +132,5 @@ export class CitySearch extends Component {
   }
 }
 
-export default CitySearch;
+export default SearchContainer;
 
