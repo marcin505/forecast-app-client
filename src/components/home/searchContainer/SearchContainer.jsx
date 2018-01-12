@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { fromJS } from 'immutable';
 import PropTypes from 'prop-types';
-import { Link as ScrollLink } from 'react-scroll';
+// import { Link as ScrollLink } from 'react-scroll';
 import SearchInput from 'components/common/searchInput/SearchInput.jsx'
-import WeatherSearchResults from 'components/home/weatherSearch/weatherSearchResults/WeatherSearchResults.jsx'
 import SectionHeader from 'components/common/sectionHeader/SectionHeader.jsx';
 import classNames from 'classnames';
 import './SearchContainer.css';
@@ -17,6 +15,7 @@ export class SearchContainer extends Component {
     defaultPlaceHolder: PropTypes.string.isRequired,
     searchName: PropTypes.string.isRequired,
     apiCallback: PropTypes.func.isRequired,
+    resetCallback: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -29,7 +28,6 @@ export class SearchContainer extends Component {
       searchString : '',
       expanded: false,
       placeHolder: '',
-      // foundRecords: fromJS([]),
     }
   };
   
@@ -49,8 +47,8 @@ export class SearchContainer extends Component {
   };
 
   resetSearchString = () => {
-     // this.setState({ searchString: '', placeHolder: '', foundRecords:fromJS([])});
-     this.setState({ searchString: '', placeHolder: ''});
+     this.setState({ searchString: ''});
+     this.props.resetCallback();
   };
 
   onFocus = ()  => {
@@ -81,7 +79,8 @@ export class SearchContainer extends Component {
       'search-container--dark': expanded,
       'search-container--additional-padding': expanded,
     });
-    return (
+
+     return (
       <div className={weatherSearchClasses}>
         <div className="content-wrapper">
           {expanded ?
@@ -106,9 +105,6 @@ export class SearchContainer extends Component {
           {expanded &&
           <div>
              {this.props.children}
-             {/*<WeatherSearchResults
-              weather={this.state.foundRecords}
-              /> */}
           </div>
           }
         </div>

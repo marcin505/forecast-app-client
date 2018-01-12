@@ -1,0 +1,35 @@
+@import 'assets/stylesheets/variables.scss';
+//@import 'assets/stylesheets/fontFace.scss';
+$column-width: 100px;
+.city-records {
+  color: #fff;
+    .city-records__labels {
+      font-family: Helvetica-Heavy, Arial, sans-serif;
+      padding-bottom:10px;
+      margin-bottom: 20px;
+      border-bottom:1px #999 solid;
+    }
+  .city-records__record, .city-records__labels {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 5px;
+
+    .record__index, .label__index {
+      width: 80px;
+    }
+    .record__localized-name, .label__localized-name {
+      width: $column-width;
+    }
+    .record__country, .label__country {
+      width: 160px;
+    }
+    .record__admin-area, .label__admin-area {
+      width: 200px;
+    }
+
+    .record__elevation, label__elevation {
+      width: $column-width;
+    }
+  }
+
+}

@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
-import {fromJS} from 'immutable';
 import {bindActionCreators} from 'redux';
 import { getWeather } from 'redux/selectors/weatherSelectors.js';
 import { getCities } from 'redux/selectors/locationsSelectors.js';
+import { citySearch, resetCities } from '../../redux/actions/locationsActions';
 import PropTypes from 'prop-types';
 import {Element, scroller} from 'react-scroll';
 import TransitionGroup from 'react-addons-transition-group';
@@ -13,7 +13,7 @@ import SearchContainer from 'components/home/searchContainer/SearchContainer.jsx
 import Modal from 'components/common/modal/Modal.jsx';
 import CityRecords from'components/home/cityRecords/CityRecords';
 import './Home.css';
-import { citySearch } from '../../redux/actions/locationsActions';
+
 
 class Home extends Component {
 
@@ -49,8 +49,14 @@ class Home extends Component {
         defaultPlaceHolder = {'Search the city'}
         searchName = {'CitySearch'}
         apiCallback = {this.props.citySearch}
+        resetCallback = {this.props.resetCities}
      >
-     <div>kurde balans</div>
+        {
+        <CityRecords
+         cities = {this.props.cities}
+         resetCallback = {this.props.resetCities}
+        />
+        }
      </SearchContainer>
    );
 
@@ -62,9 +68,9 @@ class Home extends Component {
     const expObject = expArray.reduce((obj, cur) => {
       obj[cur] = false;
       return obj;
-    }, {})
+    }, {});
     return expObject;
-   }
+   };
 
    setExpandedSections = (section, value, scrollProperties) => {
       let expandedSections = this.resetExpandedSections();
@@ -121,7 +127,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-   citySearch: bindActionCreators(citySearch, dispatch)
+   citySearch: bindActionCreators(citySearch, dispatch),
+   resetCities: bindActionCreators(resetCities, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
