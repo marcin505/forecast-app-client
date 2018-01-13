@@ -1,13 +1,16 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import './CityRecords.css';
+import { RingLoader } from 'react-spinners';
 
 export default class CityRecords extends Component {
 
    static propTypes = {
       cities: PropTypes.object.isRequired,
       resetCallback: PropTypes.func.isRequired,
+      loading: PropTypes.bool.isRequired,
    };
+
    componentWillUnmount() {
       this.props.resetCallback();
    }
@@ -23,8 +26,16 @@ export default class CityRecords extends Component {
       ))
    );
 
+   renderLoader = (loading) => (
+      <RingLoader
+         color={'#123abc'}
+         loading={loading}
+      />
+   )
+
    render() {
       const cities = this.props.cities.toJS();
+      const {loading} = this.props;
       return (
          <div className="city-records">
                   <div className="city-records__labels">
@@ -34,8 +45,9 @@ export default class CityRecords extends Component {
                      <div className="label__admin-area">Admin</div>
                      <div className="label__elevation">Elevation</div>
                   </div>
-               {this.renderRecords(cities)}
+               {loading? this.renderLoader(loading): this.renderRecords(cities)  }
          </div>
       )
    }
 };
+

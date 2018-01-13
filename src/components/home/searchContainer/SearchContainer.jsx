@@ -38,12 +38,20 @@ export class SearchContainer extends Component {
   searchDebounce = _.debounce(() => {
     const searchString = this.state.searchString.toLowerCase();
     this.props.apiCallback({query: searchString});
-    // console.log(searchString);
+     console.log('call leci')
   }, 1000);
 
+
   onChangeInputHandler = (e) => {
-    this.setState({ searchString : e.target.value });
-    this.searchDebounce();
+    this.setState({ searchString : e.target.value }, () => {
+      if (this.state.searchString.length > 4) {
+         this.searchDebounce();
+         console.log(1);
+      } else {
+        this.props.resetCallback();
+         console.log(2);
+      }
+     });
   };
 
   resetSearchString = () => {

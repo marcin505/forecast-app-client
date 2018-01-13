@@ -16,7 +16,8 @@ function* citySearchSaga ({payload: {query}}) {
     }
   } catch (error) {
     yield put(LocationsActions.citySearchFailed());
-  }
+    yield put (LocationsActions.resetCities())
+   }
 }
 
 export default function* watch() {

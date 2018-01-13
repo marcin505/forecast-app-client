@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import { getWeather } from 'redux/selectors/weatherSelectors.js';
-import { getCities } from 'redux/selectors/locationsSelectors.js';
+import { getLocations } from 'redux/selectors/locationsSelectors.js';
 import { citySearch, resetCities } from '../../redux/actions/locationsActions';
 import PropTypes from 'prop-types';
 import {Element, scroller} from 'react-scroll';
@@ -19,7 +19,7 @@ class Home extends Component {
 
    static propTypes = {
       weather: PropTypes.object.isRequired,
-      cities: PropTypes.object.isRequired,
+      locations: PropTypes.object.isRequired,
    };
 
    constructor() {
@@ -53,8 +53,9 @@ class Home extends Component {
      >
         {
         <CityRecords
-         cities = {this.props.cities}
+         cities = {this.props.locations.get('cities')}
          resetCallback = {this.props.resetCities}
+         loading={this.props.locations.get('loading')}
         />
         }
      </SearchContainer>
@@ -100,7 +101,7 @@ class Home extends Component {
    };
 
    componentWillReceiveProps(nextProps) {
-      console.log(97, nextProps.cities.toJS())
+
    }
 
    render() {
@@ -123,7 +124,7 @@ class Home extends Component {
 
 const mapStateToProps = state => ({
    weather: getWeather(state),
-   cities: getCities(state),
+   locations: getLocations(state),
 });
 
 const mapDispatchToProps = dispatch => ({

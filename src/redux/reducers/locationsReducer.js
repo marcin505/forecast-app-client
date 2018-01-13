@@ -8,7 +8,7 @@ import {
 
 export const initialState = fromJS({
     loading: false,
-    failed: false,
+    // failed: false,
     cities: fromJS([]),
 });
 
@@ -20,14 +20,14 @@ export default function locationsReducer(state = initialState, { type, payload }
         case CITY_SEARCH_SUCCESS:
             return state
             .set('cities', fromJS(payload.cities))
-            .set('failed', false)
+            // .set('failed', false)
             .set('loading', false);
        case CITY_SEARCH_FAILED:
-           return state
-            .set('failed', true)
-            .set('loading', false)
-            .set('cities', [])
-       case RESET_CITIES :
+           return initialState;
+            // .set('failed', true)
+            // .set('loading', false)
+            // .set('cities', fromJS([]));
+           case RESET_CITIES :
            return initialState;
         default: {
             return state;
