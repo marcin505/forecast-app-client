@@ -46,10 +46,11 @@ class Home extends Component {
      <SearchContainer
         expanded={this.state.expandedSections.CitySearch}
         setExpandedSections={this.setExpandedSections}      
-        defaultPlaceHolder = {'Search the city'}
+        defaultPlaceholder = {'Search the city'}
         searchName = {'CitySearch'}
         apiCallback = {this.props.citySearch}
         resetCallback = {this.props.resetCities}
+        loading = {this.props.locations.get('loading')}
      >
         {
         <CityRecords

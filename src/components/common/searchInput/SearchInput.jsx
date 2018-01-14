@@ -13,7 +13,7 @@ class SearchInput extends Component {
     onFocus: PropTypes.func.isRequired,
     onBlur: PropTypes.func.isRequired,
     searchMode: PropTypes.bool.isRequired,
-    placeHolder: PropTypes.string.isRequired,
+    placeholder: PropTypes.string.isRequired,
     resetStringHandler: PropTypes.func.isRequired,
   };
 
@@ -23,26 +23,27 @@ class SearchInput extends Component {
   };
 
   render() {
-    const { value, onChange, onFocus, onBlur, searchMode, placeHolder } = this.props;
-    const inputName = 'weatherSearch';
-    const searchInputClasses = classNames({
+    
+    const { onFocus, searchMode } = this.props,    
+    inputName = 'search-input',
+    searchInputClasses = classNames({
       'search-input': true,
       'search-mode': searchMode,
-    });
+    }),
+    inputProps = { 
+      ...this.props, 
+      className: searchInputClasses, 
+      name : inputName, 
+      type: 'text',
+      ref: input => { this.reasonInput = input}            
+    };
+
+    delete inputProps['resetStringHandler'];
+    delete inputProps['searchMode'];
 
     return (
       <div className="search-input-wrapper">
-        <input
-          type="text"
-          className={searchInputClasses}
-          name = {inputName}
-          placeholder={placeHolder}
-          value={value}
-          onChange={onChange}
-          onFocus={onFocus}
-          onBlur={onBlur}
-          ref={(input) => { this.reasonInput = input; }}
-        />
+        <input {...inputProps} />
         {searchMode ?
           <img src={close} alt="close" className="search-input-button close" onClick={() => this.resetSearchString()} />:
           <img src={magnify} alt="glass" className="search-input-button" onClick={onFocus} />

@@ -27,7 +27,7 @@ export class WeatherSearch extends Component {
     this.state = {
       searchString : '',
       expanded: false,
-      placeHolder: 'Search the weather',
+      placeholder: 'Search the weather',
       foundRecords: fromJS([]),
       isBrowseAll: false,
     }
@@ -59,7 +59,7 @@ export class WeatherSearch extends Component {
   };
 
   resetSearchString = () => {
-    this.setState({ searchString: '', placeHolder: '', foundRecords:fromJS([])});
+    this.setState({ searchString: '', placeholder: '', foundRecords:fromJS([])});
   };
 
   onFocus = ()  => {
@@ -68,23 +68,23 @@ export class WeatherSearch extends Component {
       smooth: true,
       offset: -50,
     };
-    this.setState({ placeHolder: '', isBrowseAll: false });
+    this.setState({ placeholder: '', isBrowseAll: false });
     this.props.setExpandedSections('WeatherSearch', true, scrollProperties);
   };
 
   onBlur = () => {
-    this.setState({ placeHolder: 'Search your weather' });
+    this.setState({ placeholder: 'Search your weather' });
   };
 
   closeSearchMode = () => {
-    this.setState({ searchString: '',  placeHolder: 'Search your weather' });
+    this.setState({ searchString: '',  placeholder: 'Search your weather' });
     this.props.setExpandedSections('WeatherSearch', false);
     this.setState({ foundRecords:fromJS([])});
   };
 
   openBrowseAll = () => {
     this.props.setExpandedSections('WeatherSearch', true);
-    this.setState({ isBrowseAll: true,  searchString: '', placeHolder: 'Bang Bang', foundRecords:fromJS([]) });
+    this.setState({ isBrowseAll: true,  searchString: '', placeholder: 'Bang Bang', foundRecords:fromJS([]) });
   };
 
   renderBrowseAll = () => (
@@ -97,7 +97,7 @@ export class WeatherSearch extends Component {
 
   render() {
     const { expanded } = this.props;
-    const { placeHolder, isBrowseAll } = this.state;
+    const { placeholder, isBrowseAll } = this.state;
 
     const weatherSearchClasses = classNames({
       'weather-search': true,
@@ -124,7 +124,7 @@ export class WeatherSearch extends Component {
               onBlur={this.onBlur}
               resetStringHandler={this.resetSearchString}
               searchMode={expanded}
-              placeHolder={placeHolder}
+              placeholder={placeholder}
           />
           <div className="browse-all-wrapper" id="browse">
             <ScrollLink

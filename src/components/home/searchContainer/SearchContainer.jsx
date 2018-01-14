@@ -12,10 +12,10 @@ export class SearchContainer extends Component {
   static propTypes = {
     expanded: PropTypes.bool,
     setExpandedSections: PropTypes.func.isRequired,
-    defaultPlaceHolder: PropTypes.string.isRequired,
+    defaultPlaceholder: PropTypes.string.isRequired,
     searchName: PropTypes.string.isRequired,
     apiCallback: PropTypes.func.isRequired,
-    resetCallback: PropTypes.func.isRequired,
+    loading: PropTypes.bool.isRequired,
   };
 
   static defaultProps = {
@@ -27,12 +27,12 @@ export class SearchContainer extends Component {
     this.state = {
       searchString: '',
       expanded: false,
-      placeHolder: '',
+      placeholder: '',
     }
   };
 
   componentDidMount() {
-    this.setState({ placeHolder: this.props.defaultPlaceHolder })
+    this.setState({ placeholder: this.props.defaultPlaceholder })
   }
 
   searchDebounce = (_.debounce(() => {
@@ -40,19 +40,27 @@ export class SearchContainer extends Component {
     if (this.state.searchString.length > 3) {
       this.props.apiCallback({ query: searchString });
     } 
-  }, 1000));
+  }, 500));
 
 
   onChangeInputHandler = (e) => {
     this.setState({ searchString: e.target.value }, () => {
       if (this.state.searchString.length > 3) {
-        this.searchDebounce();
+        if (!this.props.loading) {
+          this.searchDebounce();
+        }
       } else {
         this.props.resetCallback();
         console.log('reset leci');
       }
     });
   };
+
+  keyPressHandler = (e) => {
+    if (e.key === 'Enter'  && !this.props.loading) {
+      this.props.apiCallback({ query: this.state.searchString });
+    }
+  }
 
   resetSearchString = () => {
     this.setState({ searchString: '' });
@@ -65,23 +73,23 @@ export class SearchContainer extends Component {
       smooth: true,
       offset: -50,
     };
-    this.setState({ placeHolder: '' });
+    this.setState({ placeholder: '' });
     this.props.setExpandedSections(this.props.searchName, true, scrollProperties);
   };
 
   onBlur = () => {
-    this.setState({ placeHolder: this.props.defaultPlaceHolder });
+    this.setState({ placeholder: this.props.defaultPlaceholder });
   };
 
   closeSearchMode = () => {
-    this.setState({ searchString: '', placeHolder: this.props.defaultPlaceHolder });
+    this.setState({ searchString: '', placeholder: this.props.defaultPlaceholder });
     this.props.setExpandedSections(this.props.searchName, false);
     // this.setState({ foundRecords:fromJS([])});
   };
 
   render() {
     const { expanded } = this.props;
-    const { placeHolder } = this.state;
+    const { placeholder } = this.state;
     const weatherSearchClasses = classNames({
       'search-container': true,
       'search-container--dark': expanded,
@@ -94,20 +102,21 @@ export class SearchContainer extends Component {
           {expanded ?
             <SectionHeader
               closeAction={this.closeSearchMode}
-              heading={this.props.defaultPlaceHolder}
+              heading={this.props.defaultPlaceholder}
             /> :
             <p className="heading-red-sm">
-              {this.props.defaultPlaceHolder}
+              {this.props.defaultPlaceholder}
             </p>
           }
           <SearchInput
             value={this.state.searchString}
             onChange={this.onChangeInputHandler}
+            onKeyPress={this.keyPressHandler}
             onFocus={this.onFocus}
             onBlur={this.onBlur}
             resetStringHandler={this.resetSearchString}
             searchMode={expanded}
-            placeHolder={placeHolder}
+            placeholder={placeholder}
           />
 
           {expanded &&
