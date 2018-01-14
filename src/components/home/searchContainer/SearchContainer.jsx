@@ -21,51 +21,51 @@ export class SearchContainer extends Component {
   static defaultProps = {
     expanded: false,
   }
-  
+
   constructor() {
     super();
     this.state = {
-      searchString : '',
+      searchString: '',
       expanded: false,
       placeHolder: '',
     }
   };
-  
+
   componentDidMount() {
-    this.setState({placeHolder: this.props.defaultPlaceHolder})
+    this.setState({ placeHolder: this.props.defaultPlaceHolder })
   }
 
-  searchDebounce = _.debounce(() => {
+  searchDebounce = (_.debounce(() => {
     const searchString = this.state.searchString.toLowerCase();
-    this.props.apiCallback({query: searchString});
-     console.log('call leci')
-  }, 1000);
+    if (this.state.searchString.length > 3) {
+      this.props.apiCallback({ query: searchString });
+    } 
+  }, 1000));
 
 
   onChangeInputHandler = (e) => {
-    this.setState({ searchString : e.target.value }, () => {
-      if (this.state.searchString.length > 4) {
-         this.searchDebounce();
-         console.log(1);
+    this.setState({ searchString: e.target.value }, () => {
+      if (this.state.searchString.length > 3) {
+        this.searchDebounce();
       } else {
         this.props.resetCallback();
-         console.log(2);
+        console.log('reset leci');
       }
-     });
+    });
   };
 
   resetSearchString = () => {
-     this.setState({ searchString: ''});
-     this.props.resetCallback();
+    this.setState({ searchString: '' });
+    this.props.resetCallback();
   };
 
-  onFocus = ()  => {
+  onFocus = () => {
     const scrollProperties = {
       duration: 400,
       smooth: true,
       offset: -50,
     };
-    this.setState({ placeHolder: ''});
+    this.setState({ placeHolder: '' });
     this.props.setExpandedSections(this.props.searchName, true, scrollProperties);
   };
 
@@ -74,7 +74,7 @@ export class SearchContainer extends Component {
   };
 
   closeSearchMode = () => {
-    this.setState({ searchString: '',  placeHolder: this.props.defaultPlaceHolder });
+    this.setState({ searchString: '', placeHolder: this.props.defaultPlaceHolder });
     this.props.setExpandedSections(this.props.searchName, false);
     // this.setState({ foundRecords:fromJS([])});
   };
@@ -88,32 +88,32 @@ export class SearchContainer extends Component {
       'search-container--additional-padding': expanded,
     });
 
-     return (
+    return (
       <div className={weatherSearchClasses}>
         <div className="content-wrapper">
           {expanded ?
-          <SectionHeader
-            closeAction={this.closeSearchMode}
-            heading={this.props.defaultPlaceHolder}
+            <SectionHeader
+              closeAction={this.closeSearchMode}
+              heading={this.props.defaultPlaceHolder}
             /> :
             <p className="heading-red-sm">
-                {this.props.defaultPlaceHolder}
+              {this.props.defaultPlaceHolder}
             </p>
           }
           <SearchInput
-              value={this.state.searchString}
-              onChange={this.onChangeInputHandler}
-              onFocus={this.onFocus}
-              onBlur={this.onBlur}
-              resetStringHandler={this.resetSearchString}
-              searchMode={expanded}
-              placeHolder={placeHolder}
+            value={this.state.searchString}
+            onChange={this.onChangeInputHandler}
+            onFocus={this.onFocus}
+            onBlur={this.onBlur}
+            resetStringHandler={this.resetSearchString}
+            searchMode={expanded}
+            placeHolder={placeHolder}
           />
-        
+
           {expanded &&
-          <div>
-             {this.props.children}
-          </div>
+            <div>
+              {this.props.children}
+            </div>
           }
         </div>
       </div>

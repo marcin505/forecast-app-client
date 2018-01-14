@@ -14,6 +14,7 @@ export default class CityRecords extends Component {
    componentWillUnmount() {
       this.props.resetCallback();
    }
+
    renderRecords = cities => (
       cities.map((rec, index) => (
          <div key={index} className="city-records__record">

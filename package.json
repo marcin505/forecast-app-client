@@ -1,5 +1,5 @@
 {
-  "name": "success_of_the_month",
+  "name": "weather-app-client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
