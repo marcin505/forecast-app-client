@@ -35,6 +35,8 @@
 .leaflet-marker-shadow {
 	display: block;
 	}
+
+
 /* map is broken in FF if you have max-width: 100% on tiles */
 .leaflet-container img {
 	max-width: none !important;
@@ -474,6 +476,8 @@
 /* div icon */
 
 .leaflet-div-icon {
-	background: #fff;
-	border: 1px solid #666;
+	background: url(../images/marker-icon.png) no-repeat;
 	}
+.leaflet-marker-shadow {
+	background: url(../images/marker-shadow.png) no-repeat;
+}
