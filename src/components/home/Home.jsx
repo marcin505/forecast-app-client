@@ -12,6 +12,7 @@ import WeatherSearch from 'components/home/weatherSearch/WeatherSearch.jsx';
 import SearchContainer from 'components/home/searchContainer/SearchContainer.jsx';
 import Modal from 'components/common/modal/Modal.jsx';
 import CityRecords from'components/home/cityRecords/CityRecords';
+import SimpleMap from'components/simpleMap/SimpleMap';
 import './Home.css';
 
 
@@ -115,6 +116,9 @@ class Home extends Component {
             <Element name='CitySearch' className="expandable-section">
               {this.renderCitySearch()}
             </Element>
+            <div>
+            {/* <SimpleMap /> */}
+            </div>
             <TransitionGroup>
                {isModal && this.renderModal(this.state.modalMessage)}
             </TransitionGroup>

@@ -2,24 +2,19 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import PropTypes from 'prop-types';
-import {citySearch} from 'redux/actions/locationsActions.js';
+import SimpleMap from'components/simpleMap/SimpleMap';
 import './Locations.css';
 
 class Locations extends Component {
 
    static propTypes = {
       locations: PropTypes.object,
-      citySearch: PropTypes.func.isRequired,
    };
 
    static defaultProps = {
         locations: {},
    };
 
-   componentDidMount () {
-        // this.props.citySearch({query: 'Orawka'});
-   }
-   
    render() {
       return (
          <div className="locations">
@@ -28,13 +23,11 @@ class Locations extends Component {
                   Locations
                </h1>
                <hr/>
+               <SimpleMap />
             </div>
          </div>
       )
    }
 }
-const mapDispatchToProps = dispatch => ({
-    citySearch: bindActionCreators(citySearch, dispatch)
- });
 
-export default connect(null, mapDispatchToProps)(Locations);
+export default connect()(Locations);
