@@ -1,67 +1,95 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { getWeather } from 'redux/selectors/weatherSelectors.js';
 import { getLocations } from 'redux/selectors/locationsSelectors.js';
 import { citySearch, resetCities } from '../../redux/actions/locationsActions';
 import PropTypes from 'prop-types';
-import {Element, scroller} from 'react-scroll';
+import { Element, scroller } from 'react-scroll';
 import TransitionGroup from 'react-addons-transition-group';
 import WeatherSearch from 'components/home/weatherSearch/WeatherSearch.jsx';
 import SearchContainer from 'components/home/searchContainer/SearchContainer.jsx';
 import Modal from 'components/common/modal/Modal.jsx';
-import CityRecords from'components/home/cityRecords/CityRecords';
-import SimpleMap from'components/simpleMap/SimpleMap';
+import CityRecords from 'components/home/cityRecords/CityRecords';
+import SimpleMap from 'components/simpleMap/SimpleMap';
 import './Home.css';
 
 
 class Home extends Component {
 
-   static propTypes = {
-      weather: PropTypes.object.isRequired,
-      locations: PropTypes.object.isRequired,
-   };
+  static propTypes = {
+    weather: PropTypes.object.isRequired,
+    locations: PropTypes.object.isRequired,
+  };
 
-   constructor() {
-      super();
-      this.state = {
-         searchString: '',
-         modalMessage: '',
-         voteAdded: false,
-         expandedSections: {},
-         isModal: false,
-      };
-   };
+  static markersArray = [
+    { id: 'marker1', position: [50.00, 20.000], popup: 'My first popup' },
+    { id: 'marker2', position: [50.00, 20.005], popup: 'My second popup' },
+    { id: 'marker3', position: [50.00, 20.010], popup: 'My third popup' },
+  ];
 
-   renderWeatherSearch = () => (
-      <WeatherSearch
-         weather={this.props.weather}
-         expanded={this.state.expandedSections.WeatherSearch}
-         setExpandedSections={this.setExpandedSections}
-      >
-      </WeatherSearch>
-   );
+  constructor() {
+    super();
+    this.state = {
+      searchString: '',
+      modalMessage: '',
+      voteAdded: false,
+      expandedSections: {},
+      isModal: false,
+    };
+  };
 
-   renderCitySearch = () => (
-     <SearchContainer
-        expanded={this.state.expandedSections.CitySearch}
-        setExpandedSections={this.setExpandedSections}      
-        defaultPlaceholder = {'Search the city'}
-        searchName = {'CitySearch'}
-        apiCallback = {this.props.citySearch}
-        resetCallback = {this.props.resetCities}
-        loading = {this.props.locations.get('loading')}
-     >
+  renderWeatherSearch = () => (
+    <WeatherSearch
+      weather={this.props.weather}
+      expanded={this.state.expandedSections.WeatherSearch}
+      setExpandedSections={this.setExpandedSections}
+    >
+    </WeatherSearch>
+  );
+
+
+
+  renderCitySearch = () => {
+    const markers = this.props.locations.get('cities').toJS();
+    const getMarkersArray = () => (
+      markers.map((record, index) => (
         {
-        <CityRecords
-         cities = {this.props.locations.get('cities')}
-         resetCallback = {this.props.resetCities}
-         loading={this.props.locations.get('loading')}
-        />
+          id: index,
+          position: [record.GeoPosition.Latitude, record.GeoPosition.Longitude],
+          popup: `marker ${index}`
         }
-     </SearchContainer>
-   );
+      ))
+    );
+    return (
+      <SearchContainer
+        expanded={this.state.expandedSections.CitySearch}
+        setExpandedSections={this.setExpandedSections}
+        defaultPlaceholder={'Search the city'}
+        searchName={'CitySearch'}
+        apiCallback={this.props.citySearch}
+        resetCallback={this.props.resetCities}
+        loading={this.props.locations.get('loading')}
+        cities={this.props.locations.get('cities')}
+      >
+        {
+          <div>
+            <CityRecords
+              cities={this.props.locations.get('cities')}
+              resetCallback={this.props.resetCities}
+              loading={this.props.locations.get('loading')}
+            />
+            {this.props.locations.get('cities').size > 0 &&
+              <SimpleMap
+                markersArray={getMarkersArray()}
+              />
+            }
+          </div>
+        }
+      </SearchContainer>
+    )
+  };
 
   resetExpandedSections = () => {
     const htmlCollection = ReactDOM.findDOMNode(this).children;
@@ -73,68 +101,69 @@ class Home extends Component {
       return obj;
     }, {});
     return expObject;
-   };
+  };
 
-   setExpandedSections = (section, value, scrollProperties) => {
-      let expandedSections = this.resetExpandedSections();
-      expandedSections = {...expandedSections, [section]: value};
-      this.setState({expandedSections: expandedSections}, () => {
-        // console.log(67, this.state.expandedSections);
-      });
-      if (scrollProperties) {
-        scroller.scrollTo(section, scrollProperties);
-      }
-   };
-  
-   handleModal = (isOpen, message) => {
-      message = message ? message : '';
-      this.setState({isModal: isOpen, modalMessage: message});
-   };
+  setExpandedSections = (section, value, scrollProperties) => {
+    let expandedSections = this.resetExpandedSections();
+    expandedSections = { ...expandedSections, [section]: value };
+    this.setState({ expandedSections: expandedSections }, () => {
+      // console.log(67, this.state.expandedSections);
+    });
+    if (scrollProperties) {
+      scroller.scrollTo(section, scrollProperties);
+    }
+  };
 
-   renderModal = (message) => (
-      <Modal
-         message={message}
-         onClick={this.handleModal}
-      />
-   );
+  handleModal = (isOpen, message) => {
+    message = message ? message : '';
+    this.setState({ isModal: isOpen, modalMessage: message });
+  };
 
-   componentDidMount() {
-     this.setState({expandedSections: this.resetExpandedSections()})
-   };
+  renderModal = (message) => (
+    <Modal
+      message={message}
+      onClick={this.handleModal}
+    />
+  );
 
-   componentWillReceiveProps(nextProps) {
+  componentDidMount() {
+    this.setState({ expandedSections: this.resetExpandedSections() })
+  };
 
-   }
+  componentWillReceiveProps(nextProps) {
 
-   render() {
-      const { isModal} = this.state;
-      return (
-         <div className="home" id="home">
-            <Element name='WeatherSearch' className="expandable-section">
-              {this.renderWeatherSearch()}
-            </Element>
-            <Element name='CitySearch' className="expandable-section">
-              {this.renderCitySearch()}
-            </Element>
-            <div>
-            {/* <SimpleMap /> */}
-            </div>
-            <TransitionGroup>
-               {isModal && this.renderModal(this.state.modalMessage)}
-            </TransitionGroup>
-         </div>
-      );
-   }
+  }
+
+  render() {
+    const { isModal } = this.state;
+    // console.log(this.getMarkersArray());
+    return (
+      <div className="home" id="home">
+        <Element name='WeatherSearch' className="expandable-section">
+          {this.renderWeatherSearch()}
+        </Element>
+        <Element name='CitySearch' className="expandable-section">
+          {this.renderCitySearch()}
+        </Element>
+        <div>
+          {/* <SimpleMap /> */}
+        </div>
+        <TransitionGroup>
+          {isModal && this.renderModal(this.state.modalMessage)}
+        </TransitionGroup>
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = state => ({
-   weather: getWeather(state),
-   locations: getLocations(state),
+  weather: getWeather(state),
+  locations: getLocations(state),
 });
 
 const mapDispatchToProps = dispatch => ({
-   citySearch: bindActionCreators(citySearch, dispatch),
-   resetCities: bindActionCreators(resetCities, dispatch)
+  citySearch: bindActionCreators(citySearch, dispatch),
+  resetCities: bindActionCreators(resetCities, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

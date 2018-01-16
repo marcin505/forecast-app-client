@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 // import { Link as ScrollLink } from 'react-scroll';
+import classNames from 'classnames';
 import SearchInput from 'components/common/searchInput/SearchInput.jsx'
 import SectionHeader from 'components/common/sectionHeader/SectionHeader.jsx';
-import classNames from 'classnames';
 import './SearchContainer.css';
 import _ from 'lodash';
 
@@ -51,7 +51,6 @@ export class SearchContainer extends Component {
         }
       } else {
         this.props.resetCallback();
-        console.log('reset leci');
       }
     });
   };
@@ -87,6 +86,11 @@ export class SearchContainer extends Component {
     // this.setState({ foundRecords:fromJS([])});
   };
 
+  createMarkersArray = () => {
+    const markers = this.props.cities.get('cities');
+    
+  }
+
   render() {
     const { expanded } = this.props;
     const { placeholder } = this.state;
@@ -95,7 +99,7 @@ export class SearchContainer extends Component {
       'search-container--dark': expanded,
       'search-container--additional-padding': expanded,
     });
-
+    
     return (
       <div className={weatherSearchClasses}>
         <div className="content-wrapper">
@@ -121,6 +125,7 @@ export class SearchContainer extends Component {
 
           {expanded &&
             <div>
+              {/* CityRecords */}
               {this.props.children}
             </div>
           }
