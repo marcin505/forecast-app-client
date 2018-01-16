@@ -14,22 +14,29 @@ const icon = divIcon({
     popupAnchor:  [-6, -36],
 });
 
-const SingleMarker = ({ popup, position }) => (
-    <Marker position={position} icon={icon}>
+const SingleMarker = ({ popup, position, centerMapHandler }) => (
+    <Marker position={position} icon={icon} onClick ={() =>centerMapHandler(position[0], position[1])}>
       <Popup>
         <span>{popup}</span>
       </Popup>
     </Marker>
 );
 
-const MarkersList = ({ markers }) => (
+const MarkersList = ({ markers, centerMapHandler }) =>  (
     <div style={{display: 'none'}}>
         {markers.map(({ id, ...props }) => (
-            <SingleMarker key={id} {...props} />
+            <SingleMarker 
+            key={id} 
+            {...props}
+            centerMapHandler={centerMapHandler}
+            />
         ))}
     </div>
-)
- 
+);
+
+MarkersList.PropTypes = { markers: PropTypes.bool.isRequired }
+
+
 export default class SimpleMap extends Component {
     static PropTypes = {
         markersArray: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
@@ -41,6 +48,11 @@ export default class SimpleMap extends Component {
         lng: 0,
         zoom: 1,
     }
+
+    centerMapHandler = (lat, lng) => {
+        this.setState({lat, lng, zoom:7});
+    };
+
     render() {
 
         const position = [this.state.lat, this.state.lng];
@@ -57,7 +69,10 @@ export default class SimpleMap extends Component {
                         attribution={stamenTonerAttr}
                         url={stamenTonerTiles}
                     />
-                    <MarkersList markers={markersArray} />
+                    <MarkersList 
+                    markers={markersArray}
+                    centerMapHandler={this.centerMapHandler}
+                    />
                 </Map>
             </div>
         );

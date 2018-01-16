@@ -23,12 +23,6 @@ class Home extends Component {
     locations: PropTypes.object.isRequired,
   };
 
-  static markersArray = [
-    { id: 'marker1', position: [50.00, 20.000], popup: 'My first popup' },
-    { id: 'marker2', position: [50.00, 20.005], popup: 'My second popup' },
-    { id: 'marker3', position: [50.00, 20.010], popup: 'My third popup' },
-  ];
-
   constructor() {
     super();
     this.state = {
@@ -58,7 +52,7 @@ class Home extends Component {
         {
           id: index,
           position: [record.GeoPosition.Latitude, record.GeoPosition.Longitude],
-          popup: `marker ${index}`
+          popup: `${index+1}. ${record.LocalizedName}`
         }
       ))
     );

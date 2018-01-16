@@ -6,7 +6,6 @@ import {history} from 'routes/History';
 import {
    MAIN,
    PROFILE,
-   LOCATIONS,
 } from 'routes/routesDefinitions.js';
 import LinkComponent from 'components/menu/linkComponent/LinkComponent.jsx'
 import './Menu.css';
@@ -41,12 +40,6 @@ class Menu extends Component {
          <LinkComponent
             url={PROFILE}
             name={'Profile'}
-            currentUrl={currentUrl}
-            closeMenu={this.closeMenu}
-         />
-         <LinkComponent
-            url={LOCATIONS}
-            name={'Locations'}
             currentUrl={currentUrl}
             closeMenu={this.closeMenu}
          />

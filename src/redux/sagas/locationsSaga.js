@@ -9,9 +9,11 @@ const orawka = [{"Version":1,"Key":"1395440","Type":"City","Rank":85,"LocalizedN
 function* citySearchSaga({ payload: { query } }) {
   try {
     // if (query.length > 3) {
-      console.log(query);
-      // const cities = yield call(citySearchRequest, query);
-      yield put(LocationsActions.citySearchSuccess({ cities: orawka }))
+      // console.log(query);
+    // const cities = yield call(citySearchRequest, query);
+    // yield put(LocationsActions.citySearchSuccess({ cities }))
+
+    yield put(LocationsActions.citySearchSuccess({ cities: orawka }))    
     // } else {
     //   yield put(LocationsActions.resetCities())
     // }

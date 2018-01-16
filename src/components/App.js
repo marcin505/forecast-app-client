@@ -11,7 +11,6 @@ import Header from 'components/header/Header.jsx'
 import Footer from 'components/footer/Footer.jsx'
 import Home from 'components/home/Home.jsx'
 import Profile from 'components/profile/Profile';
-import Locations from 'components/locations/Locations';
 import {getProfile} from 'components/common/utils/functionUtils';
 import 'assets/stylesheets/Styles.css';
 import 'assets/stylesheets/Responsive.css';
@@ -56,12 +55,6 @@ class App extends Component {
                               redirect={LOGIN}
                               component={Profile}
                               loggedUser={loggedUser}
-                           />
-                           <PrivateRoute
-                              auth={() => isLogged}
-                              path={LOCATIONS}
-                              redirect={LOGIN}
-                              component={Locations}
                            />
                            <PrivateRoute
                               auth={() => !isLogged}
