@@ -5,8 +5,11 @@ import han from 'assets/images/people/han_solo.png';
 import { divIcon } from 'leaflet';
 import './SimpleMap.css';
 
-const stamenTonerTiles = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-const stamenTonerAttr = '&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors';
+// const tiles = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+const tiles = 'http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png';
+// const tiles = 'https://{s}.tile.thunderforest.com/pioneer/{z}/{x}/{y}.png';
+// const tiles = 'https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png';
+const attr = '&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors';
 
 const icon = divIcon({
     iconSize:     [38, 42], // size of the icon
@@ -39,11 +42,11 @@ MarkersList.PropTypes = { markers: PropTypes.bool.isRequired }
 
 export default class SimpleMap extends Component {
     static PropTypes = {
-        markersArray: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+        markersArray: PropTypes.arrayOf(
+            PropTypes.object.isRequired
+        ).isRequired,
     }
     state = {
-        // lat: 52.00,
-        // lng: 20.005,
         lat: 0,
         lng: 0,
         zoom: 1,
@@ -66,8 +69,8 @@ export default class SimpleMap extends Component {
                     zoom={zoom}
                 >
                     <TileLayer
-                        attribution={stamenTonerAttr}
-                        url={stamenTonerTiles}
+                        attribution={attr}
+                        url={tiles}
                     />
                     <MarkersList 
                     markers={markersArray}

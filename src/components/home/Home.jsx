@@ -42,8 +42,7 @@ class Home extends Component {
     >
     </WeatherSearch>
   );
-
-
+  
 
   renderCitySearch = () => {
     const markers = this.props.locations.get('cities').toJS();

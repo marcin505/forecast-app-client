@@ -7,7 +7,7 @@ import SectionHeader from 'components/common/sectionHeader/SectionHeader.jsx';
 import './SearchContainer.css';
 import _ from 'lodash';
 
-export class SearchContainer extends Component {
+export default class SearchContainer extends Component {
 
   static propTypes = {
     expanded: PropTypes.bool,
@@ -39,11 +39,11 @@ export class SearchContainer extends Component {
     const searchString = this.state.searchString.toLowerCase();
     if (this.state.searchString.length > 3) {
       this.props.apiCallback({ query: searchString });
-    } 
+    }
   }, 500));
 
 
-  onChangeInputHandler = (e) => {
+  onChangeInputHandler = e => {
     this.setState({ searchString: e.target.value }, () => {
       if (this.state.searchString.length > 3) {
         if (!this.props.loading) {
@@ -56,7 +56,7 @@ export class SearchContainer extends Component {
   };
 
   keyPressHandler = (e) => {
-    if (e.key === 'Enter'  && !this.props.loading) {
+    if (e.key === 'Enter' && !this.props.loading) {
       this.props.apiCallback({ query: this.state.searchString });
     }
   }
@@ -88,7 +88,7 @@ export class SearchContainer extends Component {
 
   createMarkersArray = () => {
     const markers = this.props.cities.get('cities');
-    
+
   }
 
   render() {
@@ -99,7 +99,7 @@ export class SearchContainer extends Component {
       'search-container--dark': expanded,
       'search-container--additional-padding': expanded,
     });
-    
+
     return (
       <div className={weatherSearchClasses}>
         <div className="content-wrapper">
@@ -134,5 +134,5 @@ export class SearchContainer extends Component {
     );
   }
 }
-export default SearchContainer;
+
 

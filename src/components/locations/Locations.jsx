@@ -14,7 +14,7 @@ class Locations extends Component {
    static defaultProps = {
         locations: {},
    };
-
+   
    render() {
       return (
          <div className="locations">

@@ -6,5 +6,3 @@ export const citySearchRequest = query => (axios
     .get(`${weatherURL}${citySearch}?apikey=${apikey}&q=${query}&details=true&language=en`)
     .then(res => res.data)
 );
-
-// http://dataservice.accuweather.com/locations/v1/cities/search?apikey=iJ2s6KXFWURBhMLcF59iSGhukAghddZz&q=Nashville&details=true
