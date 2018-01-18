@@ -16,6 +16,7 @@
     "classnames": "^2.2.5",
     "css-loader": "0.28.4",
     "dotenv": "4.0.0",
+    "enzyme": "^3.3.0",
     "eslint": "4.4.1",
     "eslint-config-react-app": "^2.0.0",
     "eslint-loader": "1.9.0",
@@ -74,8 +75,9 @@
     "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
     "start-js": "node scripts/start.js",
     "start": "npm-run-all -p watch-css start-js",
-    "build": "npm run build-css && react-scripts build",
-    "test": "node scripts/test.js --env=jsdom"
+    "build": "npm run lint && npm run build-css && react-scripts build",
+    "test": "node scripts/test.js --env=jsdom",
+    "lint": "eslint ./src "
   },
   "jest": {
     "collectCoverageFrom": [
