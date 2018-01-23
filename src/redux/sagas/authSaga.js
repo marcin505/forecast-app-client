@@ -30,9 +30,6 @@ export const profileSaga = function* profileSaga() {
          email: user.email,
          _id: user._id,
       }));
-    //   yield put(LocationsActions.citySearch({
-    //     query: 'Dombas'
-    //  }));
    } catch (error) {
       yield put(AuthActions.profileFailed());
    }

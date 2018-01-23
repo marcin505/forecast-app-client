@@ -11,8 +11,7 @@ export const citySearch = ({query}) => ({
       query,
    },
 });
-
-  
+ 
 export const citySearchSuccess = ({cities}) => {
   return ({
     type: CITY_SEARCH_SUCCESS,
