@@ -157,6 +157,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   citySearch: bindActionCreators(citySearch, dispatch),
   resetCities: bindActionCreators(resetCities, dispatch)
+
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

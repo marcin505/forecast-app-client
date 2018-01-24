@@ -12,7 +12,7 @@ export const citySearch = ({query}) => ({
    },
 });
  
-export const citySearchSuccess = ({cities}) => {
+export const citySearchSuccess = ({ cities }) => {
   return ({
     type: CITY_SEARCH_SUCCESS,
     payload: {
@@ -21,9 +21,14 @@ export const citySearchSuccess = ({cities}) => {
   })
 };
   
-export const citySearchFailed = () => ({
+export const citySearchFailed = ({ error }) => {
+  return ({
     type: CITY_SEARCH_FAILED,
-});
+    payload: {
+      error,
+    }
+  })
+};
 
 export const resetCities = () => ({
    type: RESET_CITIES,
