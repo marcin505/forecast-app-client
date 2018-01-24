@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`>>>> test locationsSagas should have the expected watchers 1`] = `
+Object {
+  "fork": Array [
+    Object {
+      "@@redux-saga/IO": true,
+      "FORK": Object {
+        "args": Array [
+          "CITY_SEARCH",
+          "@@redux-saga-test-plan/json/function/citySearchSaga",
+        ],
+        "context": null,
+        "fn": "@@redux-saga-test-plan/json/function/takeLatest",
+      },
+    },
+  ],
+  "take": Array [
+    Object {
+      "@@redux-saga/IO": true,
+      "TAKE": Object {
+        "pattern": "CITY_SEARCH",
+      },
+    },
+  ],
+}
+`;
