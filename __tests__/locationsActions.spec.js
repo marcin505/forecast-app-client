@@ -13,5 +13,4 @@ describe('>>>A C T I O N --- Test locationsActions', () => {
         const expected = { type: "CITY_SEARCH_SUCCESS", payload: {cities}};
         expect(received).toEqual(expected);
     });
-
 });

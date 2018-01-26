@@ -29,6 +29,27 @@ module.exports = {
   // You may want 'eval' instead if you prefer to see the compiled output in DevTools.
   // See the discussion in https://github.com/facebookincubator/create-react-app/issues/343.
   devtool: 'cheap-module-source-map',
+  module: {
+    loaders: [
+      {exclude: ['node_modules'], loader: 'babel', test: /\.jsx?$/},
+      {loader: 'style-loader!css-loader', test: /\.css$/},
+      {loader: 'url-loader', test: /\.gif$/},
+      {loader: 'file-loader', test: /\.(ttf|eot|svg)$/},
+    ],
+  },
+  resolve: {
+    alias: {
+      config$: './configs/app-config.js',
+      react: './vendor/react-master',
+    },
+    extensions: ['', 'js', 'jsx'],
+    modules: [
+      'node_modules',
+      'bower_components',
+      'shared',
+      '/shared/vendor/modules',
+    ],
+  },
   // These are the "entry points" to our application.
   // This means they will be the "root" imports that are included in JS bundle.
   // The first two entry points enable "hot" CSS and auto-refreshes for JS.

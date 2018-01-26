@@ -37,11 +37,11 @@ const MarkersList = ({ markers, centerMapHandler }) =>  (
     </div>
 );
 
-MarkersList.PropTypes = { markers: PropTypes.bool.isRequired }
+MarkersList.propTypes = { markers: PropTypes.array.isRequired }
 
 
 export default class SimpleMap extends Component {
-    static PropTypes = {
+    static propTypes = {
         markersArray: PropTypes.arrayOf(
             PropTypes.object.isRequired
         ).isRequired,

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { fromJS } from 'immutable';
 import { getWeather } from 'redux/selectors/weatherSelectors.js';
 import { getLocations } from 'redux/selectors/locationsSelectors.js';
 import { citySearch, resetCities } from '../../redux/actions/locationsActions';
@@ -16,12 +17,17 @@ import SimpleMap from 'components/simpleMap/SimpleMap';
 import './Home.css';
 
 
-class Home extends Component {
+export class Home extends Component {
 
   static propTypes = {
-    weather: PropTypes.object.isRequired,
-    locations: PropTypes.object.isRequired,
+    weather: PropTypes.object,
+    locations: PropTypes.object,
   };
+
+  static defaultProps  = {
+    weather: fromJS([]),
+    locations: fromJS([]),
+  }
 
   constructor() {
     super();
@@ -45,9 +51,9 @@ class Home extends Component {
   
 
   renderCitySearch = () => {
-    const markers = this.props.locations.get('cities').toJS();
+    const citiesArray = this.props.locations.get('cities') ? this.props.locations.get('cities').toJS() : [];
     const getMarkersArray = () => (
-      markers.map((record, index) => (
+      citiesArray.map((record, index) => (
         {
           id: index,
           position: [record.GeoPosition.Latitude, record.GeoPosition.Longitude],
@@ -55,6 +61,7 @@ class Home extends Component {
         }
       ))
     );
+    console.log(64, citiesArray)
     return (
       <SearchContainer
         expanded={this.state.expandedSections.CitySearch}
@@ -64,16 +71,16 @@ class Home extends Component {
         apiCallback={this.props.citySearch}
         resetCallback={this.props.resetCities}
         loading={this.props.locations.get('loading')}
-        cities={this.props.locations.get('cities')}
+        cities={citiesArray}
       >
         {
           <div>
             <CityRecords
-              cities={this.props.locations.get('cities')}
+              cities={citiesArray}
               resetCallback={this.props.resetCities}
               loading={this.props.locations.get('loading')}
             />
-            {this.props.locations.get('cities').size > 0 &&
+            {citiesArray.length > 0 &&
               <SimpleMap
                 markersArray={getMarkersArray()}
               />
@@ -83,7 +90,6 @@ class Home extends Component {
       </SearchContainer>
     )
   };
-
   resetExpandedSections = () => {
     const htmlCollection = ReactDOM.findDOMNode(this).children;
     const expArray = Array.prototype.slice.call(htmlCollection)
@@ -157,7 +163,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   citySearch: bindActionCreators(citySearch, dispatch),
   resetCities: bindActionCreators(resetCities, dispatch)
-
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

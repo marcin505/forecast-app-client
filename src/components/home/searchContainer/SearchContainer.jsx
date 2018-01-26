@@ -15,11 +15,12 @@ export default class SearchContainer extends Component {
     defaultPlaceholder: PropTypes.string.isRequired,
     searchName: PropTypes.string.isRequired,
     apiCallback: PropTypes.func.isRequired,
-    loading: PropTypes.bool.isRequired,
+    loading: PropTypes.bool,
   };
 
   static defaultProps = {
     expanded: false,
+    loading: false,
   }
 
   constructor() {

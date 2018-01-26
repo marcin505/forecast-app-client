@@ -6,10 +6,15 @@ import { RingLoader } from 'react-spinners';
 export default class CityRecords extends Component {
 
    static propTypes = {
-      cities: PropTypes.object.isRequired,
+      cities: PropTypes.array,
       resetCallback: PropTypes.func.isRequired,
-      loading: PropTypes.bool.isRequired,
-   };
+      loading: PropTypes.bool,
+      };
+   
+      static defaultProps = {
+            cities: [],
+            loading:false,      
+      }     
 
    componentWillUnmount() {
       this.props.resetCallback();
@@ -35,7 +40,7 @@ export default class CityRecords extends Component {
    )
 
    render() {
-      const cities = this.props.cities.toJS();
+      const cities = this.props.cities;
       const {loading} = this.props;
       return (
          <div className="city-records">

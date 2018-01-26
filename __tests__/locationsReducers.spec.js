@@ -1,5 +1,3 @@
-import React from 'react';
-import { shalow, mount } from 'enzyme';
 import { fromJS } from 'immutable';
 import locationsReducer, { initialState } from '../src/redux/reducers/locationsReducer';
 import { citySearch, citySearchFailed, resetCities } from '../src/redux/actions/locationsActions';
